@@ -1,0 +1,2810 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)file:///C:/Users/MCS-2034/Downloads/ContabilizaFacil_v2%20(5).html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Contabiliza Fácil — Gestão Financeira Pessoal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Paleta premium — suave, fina, sóbria (gestão financeira pessoal) */
+    --navy:#2A3340; --navy2:#323C4A; --navy3:#3C4754;        /* slate sóbrio (sidebar/headers) */
+    --gold:#9C8466; --gold2:#B6A084; --gold-lt:#F2EEE7;      /* taupe/areia (acento) */
+    --gold-dim:#6F5E45;
+    --teal:#5E7C76; --teal-lt:#EAF0EE;                       /* sálvia acinzentado */
+    --pos:#4F7A63; --neg:#A8625C;                            /* verde/rosado dessaturados */
+    --paper:#F6F5F2; --card:#FFFFFF; --tint:#F1F0EC; --line:#E6E4DE;  /* off-white quente */
+    --txt:#2D343C; --muted:#8A8E92;
+    --shadow:0 1px 2px rgba(45,52,60,.04),0 4px 16px rgba(45,52,60,.05);
+    --shadow-lg:0 20px 56px rgba(45,52,60,.14);
+    --shadow-card:0 1px 4px rgba(45,52,60,.04),0 0 0 1px rgba(45,52,60,.03);
+    --radius:12px;
+    --font-sans:'Inter Tight','DM Sans',system-ui,sans-serif;
+    --font-display:'Fraunces','Playfair Display',Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font-sans);background:var(--paper);color:var(--txt);-webkit-font-smoothing:antialiased;letter-spacing:.005em}
+  h1,h2,h3,.display{font-family:var(--font-display);letter-spacing:-.01em}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+  input,select{font-family:inherit;font-size:14px}
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:#d8d6cf;border-radius:6px}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ── Layout Shell ── */
+  .shell{display:grid;grid-template-columns:266px 1fr;min-height:100vh}
+  @media(max-width:980px){.shell{grid-template-columns:1fr}.sidebar{display:none}}
+
+  /* ── Sidebar ── */
+  .sidebar{
+    background:var(--navy);
+    color:#c2c6cc;padding:0 12px 16px;position:sticky;top:0;height:100vh;
+    display:flex;flex-direction:column;gap:2px;overflow-y:auto;
+    border-right:1px solid rgba(255,255,255,.05);
+  }
+  .sidebar::after{
+    content:'';position:absolute;top:0;right:0;width:1px;height:100%;
+    background:linear-gradient(to bottom,transparent,rgba(156,132,102,.3),transparent);
+  }
+  .brandrow{
+    padding:24px 12px 20px;border-bottom:1px solid rgba(255,255,255,.06);
+    margin-bottom:10px;
+  }
+  .brand-logo-wrap{
+    display:flex;align-items:center;gap:12px;
+  }
+  .brand-emblem{
+    width:40px;height:40px;border-radius:10px;flex:none;
+    background:transparent;border:1px solid rgba(182,160,132,.5);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-size:19px;font-weight:600;
+    color:var(--gold2);letter-spacing:.02em;
+  }
+  .brand-text{display:flex;flex-direction:column;gap:2px}
+  .brand-name{
+    font-family:var(--font-display);font-weight:600;font-size:16px;
+    color:#fff;letter-spacing:.01em;line-height:1.2;
+  }
+  .brand-tagline{font-size:9.5px;font-weight:600;color:#7d8896;letter-spacing:.14em;text-transform:uppercase}
+  .navbtn{
+    display:flex;align-items:center;gap:11px;padding:11px 14px;
+    border-radius:9px;color:#9aa2ad;font-weight:500;font-size:13.5px;
+    width:100%;text-align:left;transition:all .15s;position:relative;
+  }
+  .navbtn:hover{background:rgba(255,255,255,.05);color:#eceef1}
+  .navbtn.active{
+    background:rgba(255,255,255,.06);
+    color:#fff;
+  }
+  .navbtn.active::before{
+    content:'';position:absolute;left:0;top:22%;bottom:22%;width:2px;
+    background:var(--gold2);border-radius:0 2px 2px 0;
+  }
+  .navbtn svg{width:17px;height:17px;flex:none;stroke-width:1.7;opacity:.75}
+  .navbtn.active svg{opacity:1;color:var(--gold2)}
+  .nav-section-label{
+    font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:#5d6672;padding:16px 14px 6px;margin-top:6px;
+  }
+
+  /* ── Main content ── */
+  .main{padding:32px 36px 72px;max-width:1200px;margin:0 auto;width:100%}
+  @media(max-width:560px){.main{padding:18px 14px 88px}}
+
+  /* ── Top bar ── */
+  .topbar{
+    display:flex;align-items:flex-start;justify-content:space-between;
+    gap:14px;flex-wrap:wrap;margin-bottom:24px;
+  }
+  .eyebrow{
+    font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:4px;display:flex;align-items:center;gap:6px;
+  }
+  .eyebrow::before{content:'';width:16px;height:2px;background:var(--gold);border-radius:1px;display:inline-block}
+  .h-title{
+    font-family:var(--font-display);font-size:28px;font-weight:700;
+    color:var(--navy);line-height:1.15;
+  }
+  @media(max-width:560px){.h-title{font-size:22px}}
+  .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .selwrap{
+    display:flex;align-items:center;gap:7px;background:#fff;
+    border:1px solid var(--line);border-radius:10px;padding:7px 12px;
+    box-shadow:var(--shadow-card);transition:.15s;
+  }
+  .selwrap:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,107,110,.1)}
+  .selwrap label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .selwrap select{border:none;outline:none;font-weight:600;color:var(--navy);background:none;font-size:13px}
+
+  /* ── KPI cards ── */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.kpis{grid-template-columns:1fr}}
+  .card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);box-shadow:var(--shadow-card);
+  }
+  .kpi{padding:18px 18px 15px;position:relative;overflow:hidden;transition:all .2s}
+  .kpi-accent{
+    position:absolute;top:0;left:0;right:0;height:2px;
+    background:var(--gold);opacity:.55;
+    border-radius:var(--radius) var(--radius) 0 0;
+  }
+  .kpi-icon{
+    position:absolute;right:16px;top:16px;width:32px;height:32px;
+    border-radius:8px;background:var(--gold-lt);
+    display:flex;align-items:center;justify-content:center;opacity:.7;
+  }
+  .kpi .lab{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:2px}
+  .kpi .val{
+    font-family:var(--font-display);font-size:24px;font-weight:600;
+    margin-top:10px;line-height:1;
+  }
+  .kpi .cap{font-size:11px;color:var(--muted);margin-top:8px}
+  .kpi.clickable{cursor:pointer}
+  .kpi.clickable:hover{
+    border-color:var(--teal);box-shadow:0 10px 28px rgba(94,124,118,.14);
+    transform:translateY(-2px);
+  }
+  .kpi .cap.cta{color:var(--teal);font-weight:600}
+
+  /* ── Section header & panels ── */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:860px){.grid2{grid-template-columns:1fr}}
+  .sec-h{
+    font-size:12px;font-weight:700;color:#fff;
+    background:var(--navy);
+    padding:13px 18px;border-radius:var(--radius) var(--radius) 0 0;
+    letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;
+    justify-content:space-between;gap:10px;
+  }
+  .sec-h-icon{
+    width:22px;height:22px;border-radius:6px;
+    background:rgba(156,132,102,.2);display:flex;align-items:center;justify-content:center;
+    flex:none;
+  }
+  .panel{margin-bottom:16px;overflow:hidden}
+
+  /* ── Tables ── */
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:10px 16px}
+  thead th{
+    background:#F8FAFB;color:var(--muted);font-weight:700;
+    font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr{border-bottom:1px solid #eef2f7;transition:.1s}
+  tbody tr:hover{background:#F6FAFB}
+  tbody tr:last-child{border-bottom:none}
+  td.r,th.r{text-align:right}
+  .bar{height:6px;border-radius:4px;background:var(--tint);overflow:hidden;min-width:60px}
+  .bar>i{display:block;height:100%;border-radius:4px;transition:width .5s ease}
+
+  /* ── Tags / Chips / Pills ── */
+  .tag{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:.02em}
+  .tag.rec{background:#E3F5EC;color:#1E7C4A}
+  .tag.des{background:#FDEEEC;color:#C0392B}
+  .tag.inv{background:#E4F4F4;color:#1A6B6E}
+  .chip{
+    padding:7px 14px;border-radius:999px;border:1px solid var(--line);
+    background:#fff;font-size:13px;font-weight:600;color:var(--muted);
+    transition:all .15s;box-shadow:var(--shadow-card);
+  }
+  .chip:hover{border-color:var(--teal);color:var(--teal)}
+  .chip.on{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 3px 8px rgba(13,31,53,.18)}
+  .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700}
+
+  /* ── Modals ── */
+  .modal-bg{
+    position:fixed;inset:0;background:rgba(9,20,35,.55);
+    display:flex;align-items:center;justify-content:center;
+    padding:18px;z-index:50;backdrop-filter:blur(4px);
+    animation:fadein .2s ease;
+  }
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  .modal{
+    background:#fff;border-radius:18px;max-width:520px;width:100%;
+    box-shadow:0 24px 64px rgba(9,20,35,.25);max-height:90vh;overflow:auto;
+    animation:slideup .25s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes slideup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .modal-h{
+    padding:20px 24px;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    background:linear-gradient(90deg,var(--navy) 0%,var(--navy2) 100%);
+    border-radius:18px 18px 0 0;
+  }
+  .modal-h h3{color:#fff;font-family:var(--font-display);font-size:18px;font-weight:700}
+  .modal-h button{color:rgba(255,255,255,.6);font-size:24px;line-height:1;transition:.15s}
+  .modal-h button:hover{color:#fff}
+  .modal-b{padding:24px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  /* ── Form fields ── */
+  .field{margin-bottom:16px}
+  .field label{
+    display:block;font-size:11px;font-weight:700;color:var(--muted);
+    margin-bottom:7px;text-transform:uppercase;letter-spacing:.06em;
+  }
+  .field input,.field select{
+    width:100%;padding:12px 14px;border:1.5px solid var(--line);
+    border-radius:10px;background:#fff;outline:none;transition:.15s;
+    color:var(--txt);
+  }
+  .field input:focus,.field select:focus{
+    border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,107,110,.12);
+  }
+
+  /* ── Buttons ── */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    gap:8px;padding:12px 20px;border-radius:10px;font-weight:600;
+    font-size:13.5px;transition:all .15s;white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--navy);color:#fff;
+    box-shadow:0 2px 8px rgba(45,52,60,.14);
+  }
+  .btn-primary:hover{background:var(--navy2);box-shadow:0 4px 12px rgba(45,52,60,.18);transform:translateY(-1px)}
+  .btn-gold{
+    background:var(--gold);color:#fff;
+    box-shadow:0 2px 8px rgba(156,132,102,.22);
+  }
+  .btn-gold:hover{background:var(--gold-dim);box-shadow:0 4px 12px rgba(156,132,102,.28);transform:translateY(-1px)}
+  .btn-ghost{
+    background:#fff;border:1.5px solid var(--line);color:var(--txt);
+    box-shadow:var(--shadow-card);
+  }
+  .btn-ghost:hover{background:var(--tint);border-color:var(--teal);color:var(--teal)}
+  .btn-block{width:100%}
+
+  /* ── Empty state ── */
+  .empty{
+    padding:48px 24px;text-align:center;color:var(--muted);
+    font-size:13px;line-height:1.7;
+  }
+  .empty::before{content:'📋';display:block;font-size:28px;margin-bottom:10px;opacity:.5}
+
+  /* ── Mobile tab bar ── */
+  .mobtab{display:none}
+  @media(max-width:980px){
+    .mobtab{
+      display:flex;position:fixed;bottom:0;left:0;right:0;
+      background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+      justify-content:space-around;padding:8px 4px 10px;z-index:40;
+      box-shadow:0 -4px 24px rgba(13,31,53,.09);backdrop-filter:blur(10px);
+    }
+    .mobtab button{
+      display:flex;flex-direction:column;align-items:center;gap:3px;
+      font-size:10px;color:var(--muted);font-weight:600;padding:4px 8px;border-radius:8px;
+    }
+    .mobtab button.active{color:var(--navy)}
+    .mobtab button.active svg{stroke:var(--gold)}
+    .mobtab svg{width:20px;height:20px}
+  }
+
+  /* ── Bar chart ── */
+  .barchart{display:flex;align-items:flex-end;gap:5px;height:150px;padding:10px 4px 0}
+  .barchart .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
+  .barchart .bars{display:flex;gap:2px;align-items:flex-end;height:100%;width:100%;justify-content:center}
+  .barchart .bars span{width:44%;border-radius:4px 4px 0 0;transition:height .5s cubic-bezier(.34,1.2,.64,1)}
+  .barchart .mlab{font-size:9.5px;color:var(--muted);font-weight:600}
+
+  /* ── DRE lines ── */
+  .dre-line{display:flex;justify-content:space-between;padding:9px 16px;font-size:13px;border-bottom:1px solid #eef2f7}
+  .dre-line.sub{background:var(--tint);font-weight:700;color:var(--navy);border-bottom:1px solid var(--line)}
+  .dre-line.ind{padding-left:32px;color:var(--muted)}
+  .dre-line:hover{background:#f0f4f8}
+
+  /* ── Misc ── */
+  .note{font-size:12px;color:var(--muted);font-style:italic;line-height:1.6;padding:4px 0}
+  .toast{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(135deg,var(--navy),var(--navy2));
+    color:#fff;padding:13px 22px;border-radius:12px;font-size:13.5px;
+    font-weight:600;z-index:80;box-shadow:var(--shadow-lg);
+    animation:fadeup .25s cubic-bezier(.34,1.2,.64,1);
+    border:1px solid rgba(156,132,102,.3);display:flex;align-items:center;gap:8px;
+  }
+  .toast::before{content:'✓';width:20px;height:20px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px}
+  @keyframes fadeup{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+  /* ── Loading screen ── */
+  .loading-screen{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    flex-direction:column;gap:20px;
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%);
+  }
+  .loading-brand{
+    font-family:var(--font-display);font-size:24px;font-weight:700;color:#fff;
+    opacity:.9;
+  }
+  .loading-sub{font-size:13px;color:#688097;font-weight:500}
+  .spinner{
+    width:40px;height:40px;border:3px solid rgba(255,255,255,.1);
+    border-top-color:var(--gold);border-radius:50%;
+    animation:spin .75s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ── Navigation helpers ── */
+  .back-btn{
+    display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;
+    color:var(--muted);margin-bottom:16px;cursor:pointer;width:fit-content;
+    padding:6px 12px;border-radius:8px;border:1px solid var(--line);
+    background:#fff;box-shadow:var(--shadow-card);transition:.15s;
+  }
+  .back-btn:hover{color:var(--navy);border-color:var(--navy);transform:translateX(-2px)}
+  .cat-detail-header{
+    background:linear-gradient(135deg,var(--navy),var(--navy3));color:#fff;
+    border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;
+    position:relative;overflow:hidden;
+  }
+  .cat-detail-header::after{
+    content:'';position:absolute;right:-20px;top:-20px;
+    width:120px;height:120px;border-radius:50%;
+    background:rgba(156,132,102,.12);
+  }
+
+  /* ── Sync indicator ── */
+  .sync-indicator{display:flex;align-items:center;gap:7px;font-size:11px;color:#688097;padding:8px 12px;border-radius:8px}
+  .sync-dot{width:7px;height:7px;border-radius:50%;background:#4CAF50;box-shadow:0 0 6px rgba(76,175,80,.5)}
+  .sync-dot.syncing{background:var(--gold);animation:pulse .9s ease-in-out infinite;box-shadow:0 0 6px rgba(156,132,102,.5)}
+  .sync-dot.error{background:var(--neg);box-shadow:0 0 6px rgba(192,57,43,.5)}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+  /* ── Footer brand strip ── */
+  .sidebar-footer{
+    border-top:1px solid rgba(255,255,255,.06);
+    padding:14px 12px 8px;margin-top:auto;
+  }
+  .sidebar-footer-brand{
+    font-size:10px;font-weight:600;color:#466074;letter-spacing:.05em;
+    text-align:center;text-transform:uppercase;
+  }
+  .sidebar-footer-brand span{color:var(--gold)}
+
+  /* ── Animated entrance ── */
+  @keyframes kpiIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .kpi{animation:kpiIn .35s ease both}
+  .kpi:nth-child(2){animation-delay:.05s}
+  .kpi:nth-child(3){animation-delay:.10s}
+  .kpi:nth-child(4){animation-delay:.15s}
+</style>
+</head>
+<body>
+<div id="root"><div class="shell"><aside class="sidebar"><div class="brandrow"><div class="brand-logo-wrap"><div class="brand-emblem">CF</div><div class="brand-text"><div class="brand-name">Contabiliza Fácil</div><div class="brand-tagline">Gestão Financeira Pessoal</div></div></div></div><div class="nav-section-label">Navegação</div><button class="navbtn active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg><span>Painel</span></button><button class="navbtn "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5h16M4 12h16M4 19h10"></path></svg><span>Lançamentos</span></button><button class="navbtn "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 3h14v18H5z"></path><path d="M9 8h6M9 12h6M9 16h3"></path></svg><span>DRE</span></button><button class="navbtn "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 18 10 12l3 3 7-8"></path><path d="M20 7v4M20 7h-4"></path></svg><span>Investimentos</span></button><button class="navbtn "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.5"></circle></svg><span>Metas</span></button><button class="navbtn "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 20V4M4 20h16"></path><path d="M7 16c3-7 8-9 13-10"></path></svg><span>Projeções</span></button><button class="navbtn "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18"></path><circle cx="7" cy="6" r="2" fill="currentColor" stroke="none"></circle><circle cx="7" cy="12" r="2" fill="currentColor" stroke="none"></circle><circle cx="7" cy="18" r="2" fill="currentColor" stroke="none"></circle></svg><span>Grupos &amp; Cat.</span></button><button class="navbtn "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg><span>Admin</span></button><div class="sidebar-footer"><div class="sync-indicator"><div class="sync-dot "></div><span>Sincronizado</span></div><div style="padding: 4px 12px 8px; font-size: 11px; color: rgb(70, 96, 116); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;">gabriel.vieira_lino@hotmail.com</div><button class="navbtn" style="color: rgb(224, 112, 112); margin-top: 4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg><span>Sair</span></button><div class="sidebar-footer-brand">© Contabiliza Fácil</div></div></aside><main class="main"><div class="topbar"><div><div class="eyebrow">Painel · análise por período</div><div class="h-title">Visão Geral</div></div><div class="controls"><div class="selwrap"><label>Ano</label><select><option>2025</option><option>2026</option></select></div><div class="selwrap"><label>Período</label><select><option>Ano inteiro</option><option>1º semestre</option><option>2º semestre</option><option>1º trimestre</option><option>2º trimestre</option><option>3º trimestre</option><option>4º trimestre</option><option>Janeiro</option><option>Fevereiro</option><option>Março</option><option>Abril</option><option>Maio</option><option>Junho</option><option>Julho</option><option>Agosto</option><option>Setembro</option><option>Outubro</option><option>Novembro</option><option>Dezembro</option></select></div></div></div><div style="background: linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-shadow: rgba(13, 31, 53, 0.18) 0px 8px 24px; position: relative; overflow: hidden;"><div style="position: absolute; right: -30px; top: -30px; width: 180px; height: 180px; border-radius: 50%; background: rgba(156, 132, 102, 0.10); pointer-events: none;"></div><div style="position: relative;"><div style="color: rgba(255, 255, 255, 0.55); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;">Contabiliza Fácil</div><div style="color: rgb(255, 255, 255); font-family: &quot;Fraunces&quot;, serif; font-size: 18px; font-weight: 600; line-height: 1.3;">Sua gestão financeira pessoal</div><div style="color: rgba(255, 255, 255, 0.5); font-size: 12px; margin-top: 4px;">Acompanhe receitas, despesas e metas em tempo real</div></div><div style="display: flex; gap: 8px; flex-shrink: 0;"><div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-family:var(--font-display); font-size: 18px; color: rgba(255,255,255,.85);">CF</div></div></div><div class="kpis"><div class="card kpi clickable" style="cursor: pointer;"><div class="kpi-accent"></div><div class="lab">Receitas no período</div><div class="val" style="color: var(--pos);">R$ 3.261,29</div><div class="cap cta">Ver detalhes →</div></div><div class="card kpi clickable" style="cursor: pointer;"><div class="kpi-accent"></div><div class="lab">Despesas no período</div><div class="val" style="color: var(--neg);">R$ 4.023,54</div><div class="cap cta">Ver detalhes →</div></div><div class="card kpi" style="cursor: default;"><div class="kpi-accent"></div><div class="lab">Saldo do período</div><div class="val" style="color: var(--navy);">-R$ 762,25</div><div class="cap">receitas − despesas</div></div><div class="card kpi" style="cursor: default;"><div class="kpi-accent"></div><div class="lab">Taxa de poupança</div><div class="val" style="color: var(--teal);">-23,4%</div><div class="cap">parcela da renda preservada</div></div></div><div class="kpis"><div class="card kpi clickable" style="cursor: pointer;"><div class="kpi-accent"></div><div class="lab">Lançamentos</div><div class="val" style="color: var(--navy);">39</div><div class="cap cta">Ver detalhes →</div></div><div class="card kpi clickable" style="cursor: pointer;"><div class="kpi-accent"></div><div class="lab">Categoria líder</div><div class="val" style="color: var(--teal);"><span style="font-size: 18px;">Aplicacao Investimento</span></div><div class="cap cta">Ver detalhes →</div></div><div class="card kpi clickable" style="cursor: pointer;"><div class="kpi-accent"></div><div class="lab">Patrimônio investido</div><div class="val" style="color: var(--navy);">R$ 0,00</div><div class="cap cta">Ver detalhes →</div></div><div class="card kpi" style="cursor: default;"><div class="kpi-accent"></div><div class="lab">Situação</div><div class="val" style="color: var(--neg);">Déficit</div><div class="cap">atenção ao período</div></div></div><div class="grid2"><div class="card panel"><div class="sec-h">Despesas por categoria — período</div><table><tbody><tr style="cursor: pointer;"><td>Aplicacao Investimento<span style="font-size: 10px; color: var(--teal); margin-left: 6px;">↗</span></td><td class="r num" style="width: 110px;">R$ 1.555,72</td><td style="width: 120px;"><div class="bar"><i style="width: 100%; background: var(--gold);"></i></div></td></tr><tr style="cursor: pointer;"><td>Cartao de credito<span style="font-size: 10px; color: var(--teal); margin-left: 6px;">↗</span></td><td class="r num" style="width: 110px;">R$ 1.096,92</td><td style="width: 120px;"><div class="bar"><i style="width: 70.5088%; background: var(--gold);"></i></div></td></tr><tr style="cursor: pointer;"><td>Emprestimos<span style="font-size: 10px; color: var(--teal); margin-left: 6px;">↗</span></td><td class="r num" style="width: 110px;">R$ 730,55</td><td style="width: 120px;"><div class="bar"><i style="width: 46.959%; background: var(--gold);"></i></div></td></tr><tr style="cursor: pointer;"><td>Restaurantes / Delivery<span style="font-size: 10px; color: var(--teal); margin-left: 6px;">↗</span></td><td class="r num" style="width: 110px;">R$ 198,01</td><td style="width: 120px;"><div class="bar"><i style="width: 12.7279%; background: var(--gold);"></i></div></td></tr><tr style="cursor: pointer;"><td>Internet e telefone<span style="font-size: 10px; color: var(--teal); margin-left: 6px;">↗</span></td><td class="r num" style="width: 110px;">R$ 170,36</td><td style="width: 120px;"><div class="bar"><i style="width: 10.9506%; background: var(--gold);"></i></div></td></tr><tr style="cursor: pointer;"><td>Combustivel<span style="font-size: 10px; color: var(--teal); margin-left: 6px;">↗</span></td><td class="r num" style="width: 110px;">R$ 150,00</td><td style="width: 120px;"><div class="bar"><i style="width: 9.64184%; background: var(--gold);"></i></div></td></tr><tr style="cursor: pointer;"><td>Compras Online<span style="font-size: 10px; color: var(--teal); margin-left: 6px;">↗</span></td><td class="r num" style="width: 110px;">R$ 99,98</td><td style="width: 120px;"><div class="bar"><i style="width: 6.42661%; background: var(--gold);"></i></div></td></tr><tr style="cursor: pointer;"><td>Supermercado<span style="font-size: 10px; color: var(--teal); margin-left: 6px;">↗</span></td><td class="r num" style="width: 110px;">R$ 22,00</td><td style="width: 120px;"><div class="bar"><i style="width: 1.41414%; background: var(--gold);"></i></div></td></tr></tbody></table></div><div class="card panel"><div class="sec-h">Comparativo por período (Anual)</div><table><thead><tr><th>Período</th><th class="r">Receitas</th><th class="r">Despesas</th><th class="r">Saldo</th></tr></thead><tbody><tr><td>Ano inteiro</td><td class="r num">R$ 3.261,29</td><td class="r num">R$ 4.023,54</td><td class="r num" style="font-weight: 700; color: var(--neg);">-R$ 762,25</td></tr></tbody></table></div></div><div class="card panel"><div class="sec-h">Receitas e despesas por mês — 2026</div><div style="padding: 6px 10px;"><div class="barchart"><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 0,00" style="height: 0px; background: var(--neg);"></span></div><div class="mlab">Jan</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 0,00" style="height: 0px; background: var(--neg);"></span></div><div class="mlab">Fev</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 0,00" style="height: 0px; background: var(--neg);"></span></div><div class="mlab">Mar</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 0,00" style="height: 0px; background: var(--neg);"></span></div><div class="mlab">Abr</div></div><div class="col"><div class="bars"><span title="Receitas R$ 3.261,29" style="height: 120px; background: var(--pos);"></span><span title="Despesas R$ 2.044,72" style="height: 75.236px; background: var(--neg);"></span></div><div class="mlab">Mai</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 1.704,28" style="height: 62.7094px; background: var(--neg);"></span></div><div class="mlab">Jun</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 137,27" style="height: 5.05088px; background: var(--neg);"></span></div><div class="mlab">Jul</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 137,27" style="height: 5.05088px; background: var(--neg);"></span></div><div class="mlab">Ago</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 0,00" style="height: 0px; background: var(--neg);"></span></div><div class="mlab">Set</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 0,00" style="height: 0px; background: var(--neg);"></span></div><div class="mlab">Out</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 0,00" style="height: 0px; background: var(--neg);"></span></div><div class="mlab">Nov</div></div><div class="col"><div class="bars"><span title="Receitas R$ 0,00" style="height: 0px; background: var(--pos);"></span><span title="Despesas R$ 0,00" style="height: 0px; background: var(--neg);"></span></div><div class="mlab">Dez</div></div></div><div style="display: flex; gap: 18px; padding: 10px 4px 4px; font-size: 12px; color: var(--muted);"><span><i style="display: inline-block; width: 10px; height: 10px; background: var(--pos); border-radius: 2px; margin-right: 6px;"></i>Receitas</span><span><i style="display: inline-block; width: 10px; height: 10px; background: var(--neg); border-radius: 2px; margin-right: 6px;"></i>Despesas</span></div></div></div></main><nav class="mobtab"><button class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg><span>Painel</span></button><button class=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5h16M4 12h16M4 19h10"></path></svg><span>Lançamen…</span></button><button class=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 3h14v18H5z"></path><path d="M9 8h6M9 12h6M9 16h3"></path></svg><span>DRE</span></button><button class=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 18 10 12l3 3 7-8"></path><path d="M20 7v4M20 7h-4"></path></svg><span>Investim…</span></button><button class=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.5"></circle></svg><span>Metas</span></button><button class=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 20V4M4 20h16"></path><path d="M7 16c3-7 8-9 13-10"></path></svg><span>Projeções</span></button><button class=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18"></path><circle cx="7" cy="6" r="2" fill="currentColor" stroke="none"></circle><circle cx="7" cy="12" r="2" fill="currentColor" stroke="none"></circle><circle cx="7" cy="18" r="2" fill="currentColor" stroke="none"></circle></svg><span>Grupos &amp;…</span></button><button class=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg><span>Admin</span></button></nav></div></div>
+
+<!-- React + ReactDOM -->
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const { useState, useEffect, useMemo, useRef, useCallback } = React;
+
+/* ============================================================
+   SUPABASE CONFIG
+   ============================================================ */
+const SUPABASE_URL = 'https://csoptfpyyomdbxebzwbe.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzb3B0ZnB5eW9tZGJ4ZWJ6d2JlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNTY0ODksImV4cCI6MjA5NTkzMjQ4OX0.sVTBVNeMTSYX9RueHT75H-vUlXzQfIKcR95LgVZYF6Q';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ============================================================
+   CONSTANTES BASE (defaults para novos usuários)
+   ============================================================ */
+const DEFAULT_GRUPOS_REC = ["Trabalho","Investimentos","Eventual","Outros"];
+const DEFAULT_CATS_REC = {
+  "Trabalho":["Salário CLT","Benefícios","Freelance / PJ","Bonificações / PLR","13º salário","Férias"],
+  "Investimentos":["Dividendos / JCP","Juros / Renda fixa","Aluguéis recebidos"],
+  "Eventual":["Restituição de IR","Vendas / Comissões","Reembolsos","Presentes / Doações"],
+  "Outros":["Outras receitas 1","Outras receitas 2","Outras receitas 3"]
+};
+const DEFAULT_GRUPOS_DES = ["Moradia","Alimentação","Transporte","Saúde","Educação","Lazer","Pessoal","Família","Financeiro","Tributos","Outros"];
+const CATS_INV = ["Compra de ativo","Aporte / Reforço","Resgate / Venda","Dividendos reinvestidos","Aplicação automática"];
+const DEFAULT_CATS_DES = {
+  "Moradia":["Aluguel / Financiamento","Condomínio","Energia elétrica","Água e esgoto","Internet e telefone","Gás"],
+  "Alimentação":["Supermercado","Restaurantes / Delivery"],
+  "Transporte":["Combustível","Transporte / Apps","Manutenção do veículo"],
+  "Saúde":["Consultas / Medicamentos","Academia / Esportes"],
+  "Educação":["Cursos / Mensalidades"],
+  "Lazer":["Streaming / Assinaturas","Viagens"],
+  "Pessoal":["Compras Online","Vestuário","Beleza e higiene"],
+  "Família":["Aplicação Investimento","Presentes / Doações"],
+  "Financeiro":["Cartão de crédito","Seguros"],
+  "Tributos":["Impostos e taxas"],
+  "Outros":["Imprevistos","Empréstimos"]
+};
+const FORMAS = ["Pix","Cartão de crédito","Cartão de débito","Dinheiro","Boleto","Transferência"];
+const CLASSES_INV = ["Renda Fixa","Tesouro Direto","Ações BR","FIIs","BDRs","ETFs BR","ETFs Internacionais","Ações EUA","Cripto","Previdência","Reserva de Emergência"];
+const MESES = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+const PERIODOS = [
+  {lab:"Ano inteiro",s:1,e:12,g:"Anual"},
+  {lab:"1º semestre",s:1,e:6,g:"Semestral"},{lab:"2º semestre",s:7,e:12,g:"Semestral"},
+  {lab:"1º trimestre",s:1,e:3,g:"Trimestral"},{lab:"2º trimestre",s:4,e:6,g:"Trimestral"},
+  {lab:"3º trimestre",s:7,e:9,g:"Trimestral"},{lab:"4º trimestre",s:10,e:12,g:"Trimestral"},
+  ...MESES.map((m,i)=>({lab:["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"][i],s:i+1,e:i+1,g:"Mensal"}))
+];
+
+const fmtBRL = (v,dec=2) => (v<0?"-":"")+"R$ "+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+const fmtPct = v => (v*100).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+"%";
+const uid = () => crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2,18);
+const todayISO = () => new Date().toISOString().slice(0,10);
+const sum = (arr,f) => arr.reduce((a,b)=>a+(f?f(b):b),0);
+
+/* ============================================================
+   VINCULAÇÃO INVESTIMENTO ↔ CARTEIRA
+   Aplica um lançamento do tipo Investimento na carteira:
+   - encontra o ativo por ticker (ou nome) ou cria um novo
+   - soma cotas e valor aplicado e recalcula o preço médio
+   - resgate/venda reduz cotas e valor aplicado proporcionalmente
+   Retorna a nova lista de investimentos.
+   ============================================================ */
+function normTicker(t){return String(t||'').trim().toUpperCase();}
+function aplicarNaCarteira(investimentos, lanc){
+  const lista = investimentos.map(i=>({...i}));
+  const tk = normTicker(lanc.ticker);
+  const nome = String(lanc.ativo||lanc.descricao||'').trim();
+  const cotasMov = parseFloat(lanc.cotas)||0;
+  const valor = parseFloat(lanc.valor)||0;
+  const isResgate = /resgate|venda/i.test(lanc.categoria||'');
+  // localizar ativo: por ticker (se houver) senão por nome
+  let idx = -1;
+  if(tk) idx = lista.findIndex(i=>normTicker(i.ticker)===tk);
+  if(idx<0 && nome) idx = lista.findIndex(i=>String(i.ativo||'').trim().toLowerCase()===nome.toLowerCase());
+  if(isResgate){
+    if(idx>=0){
+      const a=lista[idx];
+      const cotasAntes=parseFloat(a.cotas)||0;
+      const pm = cotasAntes>0 ? (parseFloat(a.aplicado)||0)/cotasAntes : 0;
+      const cotasVend = cotasMov>0?Math.min(cotasMov,cotasAntes):cotasAntes;
+      const novasCotas = Math.max(cotasAntes-cotasVend,0);
+      a.cotas = novasCotas;
+      a.aplicado = Math.max((parseFloat(a.aplicado)||0) - (cotasVend*pm), 0);
+      // valor atual proporcional
+      const atualUnit = cotasAntes>0 ? (parseFloat(a.atual)||0)/cotasAntes : 0;
+      a.atual = novasCotas>0 ? atualUnit*novasCotas : 0;
+      a.precoMedio = novasCotas>0 ? a.aplicado/novasCotas : 0;
+      if(novasCotas<=0 && (a.aplicado||0)<=0){ lista.splice(idx,1); }
+    }
+    return lista;
+  }
+  // compra / aporte
+  if(idx>=0){
+    const a=lista[idx];
+    const cotasAntes=parseFloat(a.cotas)||0;
+    const aplicAntes=parseFloat(a.aplicado)||0;
+    const novasCotas = cotasAntes + (cotasMov>0?cotasMov:0);
+    a.aplicado = aplicAntes + valor;
+    a.cotas = novasCotas>0?novasCotas:cotasAntes;
+    a.atual = (parseFloat(a.atual)||0) + valor; // sem cotação, soma o aporte ao valor atual
+    a.precoMedio = a.cotas>0 ? a.aplicado/a.cotas : 0;
+    if(lanc.classe) a.classe=a.classe||lanc.classe;
+    if(tk && !a.ticker) a.ticker=tk;
+    a.ultimoAporte = lanc.data;
+    return lista;
+  }
+  // novo ativo
+  const cotas = cotasMov>0?cotasMov:1;
+  lista.push({
+    id:uid(), ativo: nome||tk||'Novo ativo', ticker: tk,
+    classe: lanc.classe||'Renda Fixa', aporte: lanc.data, ultimoAporte: lanc.data,
+    cotas, aplicado: valor, atual: valor, precoMedio: cotas>0?valor/cotas:valor,
+    origemLancamento:true
+  });
+  return lista;
+}
+
+/* ============================================================
+   ÍCONES
+   ============================================================ */
+const Ic = {
+  painel: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("rect",{x:"3",y:"3",width:"7",height:"9",rx:"1.5"}),React.createElement("rect",{x:"14",y:"3",width:"7",height:"5",rx:"1.5"}),React.createElement("rect",{x:"14",y:"12",width:"7",height:"9",rx:"1.5"}),React.createElement("rect",{x:"3",y:"16",width:"7",height:"5",rx:"1.5"})),
+  lanc: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M4 5h16M4 12h16M4 19h10"})),
+  dre: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M5 3h14v18H5z"}),React.createElement("path",{d:"M9 8h6M9 12h6M9 16h3"})),
+  inv: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M4 18 10 12l3 3 7-8"}),React.createElement("path",{d:"M20 7v4M20 7h-4"})),
+  metas: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("circle",{cx:"12",cy:"12",r:"8"}),React.createElement("circle",{cx:"12",cy:"12",r:"3.5"})),
+  proj: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M4 20V4M4 20h16"}),React.createElement("path",{d:"M7 16c3-7 8-9 13-10"})),
+  sair: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"})),
+  admin: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"})),
+  users: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"}),React.createElement("circle",{cx:"9",cy:"7",r:"4"}),React.createElement("path",{d:"M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"})),
+  plus: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M12 5v14M5 12h14"})),
+  up: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M12 19V5M5 12l7-7 7 7"})),
+  back: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M19 12H5M12 5l-7 7 7 7"})),
+  cloud: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"})),
+  grupos: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M3 6h18M3 12h18M3 18h18"}),React.createElement("circle",{cx:"7",cy:"6",r:"2",fill:"currentColor",stroke:"none"}),React.createElement("circle",{cx:"7",cy:"12",r:"2",fill:"currentColor",stroke:"none"}),React.createElement("circle",{cx:"7",cy:"18",r:"2",fill:"currentColor",stroke:"none"})),
+  contas: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("rect",{x:"2",y:"7",width:"20",height:"14",rx:"2"}),React.createElement("path",{d:"M16 2H8L2 7h20l-6-5z"}),React.createElement("path",{d:"M12 12v4M9 14h6"})),
+  edit: p => React.createElement("svg",{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",...p},React.createElement("path",{d:"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"}),React.createElement("path",{d:"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"})),
+};
+
+/* ============================================================
+   SEED DATA (para primeiro uso)
+   ============================================================ */
+function seedData() {
+  const y=2026, y0=2025;
+  const L = [
+    [`${y}-01-05`,"Receita","Trabalho","Salário CLT","Salário do mês","Transferência",8500],
+    [`${y}-01-15`,"Receita","Investimentos","Dividendos / JCP","Proventos","Transferência",420],
+    [`${y}-01-06`,"Despesa","Moradia","Aluguel / Financiamento","Aluguel","Boleto",2200],
+    [`${y}-01-08`,"Despesa","Alimentação","Supermercado","Compras","Cartão de crédito",920],
+    [`${y}-01-12`,"Despesa","Transporte","Combustível","Gasolina","Cartão de crédito",380],
+    [`${y}-01-20`,"Despesa","Tributos","Impostos e taxas","IPVA","Boleto",600],
+    [`${y}-01-22`,"Despesa","Lazer","Streaming / Assinaturas","Assinaturas","Cartão de crédito",119],
+    [`${y}-02-05`,"Receita","Trabalho","Salário CLT","Salário do mês","Transferência",8500],
+    [`${y}-02-09`,"Despesa","Alimentação","Supermercado","Compras","Cartão de crédito",870],
+    [`${y}-02-14`,"Despesa","Saúde","Consultas / Medicamentos","Dentista","Pix",260],
+    [`${y}-03-05`,"Receita","Trabalho","Salário CLT","Salário do mês","Transferência",8500],
+    [`${y}-03-18`,"Despesa","Lazer","Viagens","Viagem","Cartão de crédito",2400],
+    [`${y0}-11-05`,"Receita","Trabalho","Salário CLT","Salário 2025","Transferência",7800],
+    [`${y0}-11-08`,"Despesa","Moradia","Aluguel / Financiamento","Aluguel 2025","Boleto",2000],
+  ].map(r=>({id:uid(),data:r[0],tipo:r[1],grupo:r[2],categoria:r[3],descricao:r[4],forma:r[5],valor:r[6]}));
+  const INV = [
+    {id:uid(),ativo:"Tesouro Selic 2029",ticker:"TESOURO SELIC 2029",classe:"Tesouro Direto",aporte:"2025-03-01",cotas:1,aplicado:10000,atual:10750,precoMedio:10000},
+    {id:uid(),ativo:"CDB 110% CDI",ticker:"",classe:"Renda Fixa",aporte:"2025-04-15",cotas:1,aplicado:5000,atual:5320,precoMedio:5000},
+    {id:uid(),ativo:"ITSA4",ticker:"ITSA4",classe:"Ações BR",aporte:"2025-01-10",cotas:200,aplicado:3000,atual:3450,precoMedio:15},
+    {id:uid(),ativo:"MXRF11",ticker:"MXRF11",classe:"FIIs",aporte:"2025-02-05",cotas:250,aplicado:2500,atual:2620,precoMedio:10},
+    {id:uid(),ativo:"BOVA11",ticker:"BOVA11",classe:"ETFs BR",aporte:"2025-05-20",cotas:40,aplicado:4000,atual:4280,precoMedio:100},
+    {id:uid(),ativo:"VOO",ticker:"VOO",classe:"ETFs Internacionais",aporte:"2025-06-12",cotas:5,aplicado:3500,atual:3890,precoMedio:700},
+    {id:uid(),ativo:"Bitcoin",ticker:"BTC-USD",classe:"Cripto",aporte:"2025-09-01",cotas:0.015,aplicado:1000,atual:1450,precoMedio:66666.67},
+  ];
+  const METAS = [
+    {id:uid(),objetivo:"Reserva de emergência",alvo:30000,acumulado:12000,prazo:12},
+    {id:uid(),objetivo:"Viagem internacional",alvo:15000,acumulado:3000,prazo:18},
+    {id:uid(),objetivo:"Entrada do imóvel",alvo:80000,acumulado:20000,prazo:36},
+    {id:uid(),objetivo:"Troca de carro",alvo:40000,acumulado:5000,prazo:24},
+  ];
+  const PREMISSAS = {inicial:50000,aporte:2000,reajuste:0.05,real:0.08,inflacao:0.04,idade:30,horizonte:30};
+  const ALAV = {aporteMensal:2000,real:0.08,rendaDesejada:8000,retirada:0.04};
+  // Grupos e categorias personalizados POR USUÁRIO
+  const GRUPOS_CAT = {
+    gruposRec: [...DEFAULT_GRUPOS_REC],
+    catsRec: JSON.parse(JSON.stringify(DEFAULT_CATS_REC)),
+    gruposDes: [...DEFAULT_GRUPOS_DES],
+    catsDes: JSON.parse(JSON.stringify(DEFAULT_CATS_DES)),
+  };
+  return {lancamentos:L,investimentos:INV,metas:METAS,premissas:PREMISSAS,alavancagem:ALAV,gruposCat:GRUPOS_CAT,contas:[
+    {id:uid(),nome:"Conta Principal",banco:"Nubank",tipo:"Corrente",saldoInicial:5000,cor:"#5E7C76"},
+  ]};
+}
+
+/* ============================================================
+   SUPABASE DB LAYER — multi-usuário com auth
+   Tabela: financa_data (id uuid pk, user_id uuid, payload jsonb, updated_at timestamptz)
+   RLS garante que cada usuário acessa apenas seus dados.
+   ============================================================ */
+
+function withTimeout(promise, ms, label){
+  return Promise.race([
+    promise,
+    new Promise((_,rej)=>setTimeout(()=>rej(new Error('Tempo esgotado ('+(label||'rede')+')')), ms))
+  ]);
+}
+async function dbLoad(userId) {
+  const {data,error} = await withTimeout(
+    sb.from('financa_data').select('payload').eq('user_id',userId).maybeSingle(),
+    8000, 'carregar dados'
+  );
+  if(error) throw error;
+  return data ? data.payload : null;
+}
+
+async function dbSave(userId, payload) {
+  const {error} = await sb.from('financa_data').upsert(
+    {user_id: userId, payload, updated_at: new Date().toISOString()},
+    {onConflict:'user_id'}
+  );
+  if(error) throw error;
+}
+
+/* ============================================================
+   TELA DE LOGIN / CADASTRO
+   ============================================================ */
+function AuthScreen({onAuth}) {
+  const [modo, setModo] = useState('login'); // 'login' | 'cadastro' | 'recuperar'
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [nome, setNome] = useState('');
+  const [erro, setErro] = useState('');
+  const [msg, setMsg] = useState('');
+  const [carregando, setCarregando] = useState(false);
+
+  async function entrar(e) {
+    e.preventDefault();
+    setErro(''); setMsg('');
+    if(!email||!senha){setErro('Preencha e-mail e senha.');return;}
+    setCarregando(true);
+    try {
+      const {data,error} = await sb.auth.signInWithPassword({email,password:senha});
+      if(error) throw error;
+      onAuth(data.user);
+    } catch(err) {
+      setErro(traduzirErro(err.message));
+    } finally { setCarregando(false); }
+  }
+
+  async function cadastrar(e) {
+    e.preventDefault();
+    setErro(''); setMsg('');
+    if(!email||!senha){setErro('Preencha e-mail e senha.');return;}
+    if(senha.length<6){setErro('A senha precisa ter pelo menos 6 caracteres.');return;}
+    setCarregando(true);
+    try {
+      const {data,error} = await sb.auth.signUp({email,password:senha,options:{data:{nome}}});
+      if(error) throw error;
+      if(data.user && data.user.identities && data.user.identities.length===0) {
+        setErro('Este e-mail já está cadastrado. Faça login.');
+      } else {
+        setMsg('Cadastro realizado! Verifique seu e-mail para confirmar a conta, depois faça login.');
+        setModo('login');
+      }
+    } catch(err) {
+      setErro(traduzirErro(err.message));
+    } finally { setCarregando(false); }
+  }
+
+  async function recuperar(e) {
+    e.preventDefault();
+    setErro(''); setMsg('');
+    if(!email){setErro('Informe seu e-mail.');return;}
+    setCarregando(true);
+    try {
+      const {error} = await sb.auth.resetPasswordForEmail(email);
+      if(error) throw error;
+      setMsg('Enviamos um link de recuperação para '+email);
+    } catch(err) {
+      setErro(traduzirErro(err.message));
+    } finally { setCarregando(false); }
+  }
+
+  function traduzirErro(msg) {
+    if(!msg) return 'Erro desconhecido.';
+    if(msg.includes('Invalid login')) return 'E-mail ou senha incorretos.';
+    if(msg.includes('Email not confirmed')) return 'Confirme seu e-mail antes de entrar.';
+    if(msg.includes('User already registered')) return 'E-mail já cadastrado. Faça login.';
+    if(msg.includes('Password should')) return 'Senha muito curta (mínimo 6 caracteres).';
+    if(msg.includes('rate limit')) return 'Muitas tentativas. Aguarde alguns minutos.';
+    return msg;
+  }
+
+  const isLogin = modo==='login';
+  const isCad   = modo==='cadastro';
+  const isRec   = modo==='recuperar';
+
+  return React.createElement("div",{style:{minHeight:'100vh',background:'linear-gradient(135deg,#0D1F35 0%,#1D3A5F 60%,#0D1F35 100%)',display:'flex',alignItems:'center',justifyContent:'center',padding:20,position:'relative',overflow:'hidden'}},
+    // Background decoration
+    React.createElement("div",{style:{position:'absolute',top:'-80px',right:'-80px',width:400,height:400,borderRadius:'50%',background:'rgba(156,132,102,.06)',pointerEvents:'none'}}),
+    React.createElement("div",{style:{position:'absolute',bottom:'-120px',left:'-60px',width:360,height:360,borderRadius:'50%',background:'rgba(26,107,110,.08)',pointerEvents:'none'}}),
+    React.createElement("div",{style:{background:'#fff',borderRadius:22,maxWidth:440,width:'100%',boxShadow:'0 32px 80px rgba(0,0,0,.35)',overflow:'hidden',position:'relative'}},
+      // Header band
+      React.createElement("div",{style:{background:'linear-gradient(135deg,#0D1F35,#1D3A5F)',padding:'32px 32px 28px',position:'relative',overflow:'hidden'}},
+        React.createElement("div",{style:{position:'absolute',right:-30,top:-30,width:160,height:160,borderRadius:'50%',background:'rgba(156,132,102,.1)',pointerEvents:'none'}}),
+        React.createElement("div",{style:{display:'flex',alignItems:'center',gap:14,position:'relative'}},
+          React.createElement("div",{style:{width:52,height:52,borderRadius:13,background:'transparent',border:'1px solid rgba(182,160,132,.55)',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Fraunces,serif',fontSize:22,fontWeight:600,color:'#B6A084',flex:'none'}},"CF"),
+          React.createElement("div",null,
+            React.createElement("div",{style:{color:'#fff',fontFamily:'Fraunces,serif',fontSize:20,fontWeight:700,lineHeight:1.2}},"Contabiliza Fácil"),
+            React.createElement("div",{style:{color:'rgba(255,255,255,.45)',fontSize:11,fontWeight:700,letterSpacing:'.14em',textTransform:'uppercase',marginTop:2}},"Gestão Financeira Pessoal")
+          )
+        ),
+        React.createElement("div",{style:{color:'rgba(255,255,255,.6)',fontSize:13,marginTop:16,lineHeight:1.5,position:'relative'}},
+          isLogin?'Bem-vindo de volta. Acesse sua conta financeira.':
+          isCad?'Crie sua conta e comece a organizar suas finanças.':
+          'Informe seu e-mail para receber o link de recuperação.'
+        )
+      ),
+      // Form
+      React.createElement("div",{style:{padding:'28px 32px 32px'}},
+        isCad && React.createElement("div",{className:"field"},
+          React.createElement("label",null,"Nome (opcional)"),
+          React.createElement("input",{value:nome,onChange:e=>setNome(e.target.value),placeholder:"Seu nome completo"})
+        ),
+        React.createElement("div",{className:"field"},
+          React.createElement("label",null,"E-mail"),
+          React.createElement("input",{type:"email",value:email,onChange:e=>setEmail(e.target.value),placeholder:"seu@email.com",autoComplete:"username"})
+        ),
+        !isRec && React.createElement("div",{className:"field"},
+          React.createElement("label",null,"Senha"),
+          React.createElement("input",{type:"password",value:senha,onChange:e=>setSenha(e.target.value),placeholder:isCad?"Mínimo 6 caracteres":"••••••••",autoComplete:isLogin?"current-password":"new-password",onKeyDown:e=>e.key==='Enter'&&(isLogin?entrar(e):isCad?cadastrar(e):null)})
+        ),
+        erro && React.createElement("div",{style:{background:'#FDEEEC',color:'#C0392B',borderRadius:10,padding:'10px 14px',fontSize:13,marginBottom:14,display:'flex',alignItems:'center',gap:8}},
+          React.createElement("span",{style:{fontSize:16}},"⚠️"),erro
+        ),
+        msg  && React.createElement("div",{style:{background:'#E3F5EC',color:'#1E7C4A',borderRadius:10,padding:'10px 14px',fontSize:13,marginBottom:14,display:'flex',alignItems:'center',gap:8}},
+          React.createElement("span",{style:{fontSize:16}},"✅"),msg
+        ),
+        React.createElement("button",{
+          className:"btn btn-primary btn-block",
+          style:{marginTop:4,background:'linear-gradient(135deg,#0D1F35,#1D3A5F)',fontSize:14,padding:'14px 20px',borderRadius:12},
+          disabled:carregando,
+          onClick:isLogin?entrar:isCad?cadastrar:recuperar
+        }, carregando?'Aguarde...':(isLogin?'Entrar na plataforma':isCad?'Criar conta':'Enviar link de recuperação')),
+        // Links de troca de modo
+        React.createElement("div",{style:{display:'flex',justifyContent:'space-between',marginTop:20,fontSize:13,gap:8}},
+          isLogin && React.createElement("button",{style:{color:'var(--teal,#1A6B6E)',fontWeight:700,background:'none',border:'none',cursor:'pointer',padding:0},onClick:()=>{setErro('');setMsg('');setModo('cadastro');}},"Criar nova conta"),
+          isLogin && React.createElement("button",{style:{color:'var(--muted,#6B7E92)',background:'none',border:'none',cursor:'pointer',padding:0},onClick:()=>{setErro('');setMsg('');setModo('recuperar');}},"Esqueci a senha"),
+          !isLogin && React.createElement("button",{style:{color:'var(--teal,#1A6B6E)',fontWeight:700,background:'none',border:'none',cursor:'pointer',padding:0},onClick:()=>{setErro('');setMsg('');setModo('login');}},"← Voltar ao login")
+        ),
+        React.createElement("div",{style:{borderTop:'1px solid #eef2f7',marginTop:24,paddingTop:16,textAlign:'center',fontSize:11,color:'#9aadbd',letterSpacing:'.04em',fontWeight:600,textTransform:'uppercase'}},"© Contabiliza Fácil")
+      )
+    )
+  );
+}
+
+/* ============================================================
+   APP ROOT — com autenticação
+   ============================================================ */
+function App() {
+  const [user, setUser]       = useState(null);       // usuário logado
+  const [authReady, setAuthReady] = useState(false);  // sessão verificada
+  const [appData, setAppData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [syncState, setSyncState] = useState('ok');
+  const saveTimer = useRef(null);
+
+  // 1. Verificar sessão existente ao iniciar (com timeout p/ não travar)
+  useEffect(()=>{
+    let resolvido=false;
+    withTimeout(sb.auth.getSession(), 6000, 'verificar sessão')
+      .then(({data:{session}})=>{
+        resolvido=true;
+        setUser(session?.user ?? null);
+        setAuthReady(true);
+      })
+      .catch((e)=>{
+        console.error('Sessão:', e);
+        resolvido=true;
+        setUser(null);
+        setAuthReady(true); // libera para a tela de login em vez de congelar
+      });
+    // rede de segurança extra
+    const t=setTimeout(()=>{ if(!resolvido) setAuthReady(true); }, 7000);
+    // Listener para mudanças de sessão (login/logout)
+    const {data:{subscription}} = sb.auth.onAuthStateChange((_event,session)=>{
+      setUser(session?.user ?? null);
+    });
+    return ()=>{ clearTimeout(t); subscription.unsubscribe(); };
+  },[]);
+
+  // 2. Quando user muda (login ou troca), carrega dados
+  useEffect(()=>{
+    if(!user) { setAppData(null); return; }
+    setLoading(true);
+    (async()=>{
+      try {
+        let d = await dbLoad(user.id);
+        if(!d) {
+          d = seedData();
+          await dbSave(user.id, d);
+        }
+        // Migração: adicionar gruposCat se não existir
+        if(!d.gruposCat) {
+          d = {...d, gruposCat:{
+            gruposRec:[...DEFAULT_GRUPOS_REC],
+            catsRec:JSON.parse(JSON.stringify(DEFAULT_CATS_REC)),
+            gruposDes:[...DEFAULT_GRUPOS_DES],
+            catsDes:JSON.parse(JSON.stringify(DEFAULT_CATS_DES)),
+          }};
+        }
+        // Migração: adicionar cotas e ticker em investimentos existentes
+        if(d.investimentos && d.investimentos.some(i=>i.cotas===undefined)){
+          d = {...d, investimentos: d.investimentos.map(i=>({
+            ticker: i.ticker||'',
+            cotas: i.cotas!==undefined?i.cotas:1,
+            ...i,
+          }))};
+        }
+        // Migração: preço médio na carteira
+        if(d.investimentos){
+          d = {...d, investimentos: d.investimentos.map(i=>({
+            ...i,
+            precoMedio: (i.precoMedio!==undefined?i.precoMedio:((i.cotas>0)?(i.aplicado/i.cotas):0))
+          }))};
+        }
+        // Migração: REMOVER "Investimentos" das despesas (investimento não é gasto;
+        // tem área própria via lançamento tipo Investimento + carteira)
+        if(d.gruposCat){
+          const gc={...d.gruposCat};
+          if(gc.gruposDes && gc.gruposDes.includes('Investimentos')){
+            gc.gruposDes=gc.gruposDes.filter(g=>g!=='Investimentos');
+          }
+          if(gc.catsDes && gc.catsDes['Investimentos']){
+            const cd={...gc.catsDes}; delete cd['Investimentos']; gc.catsDes=cd;
+          }
+          d={...d,gruposCat:gc};
+        }
+        // Migração: adicionar contas correntes se não existir
+        if(!d.contas) {
+          d = {...d, contas:[
+            {id:uid(),nome:"Conta Principal",banco:"Banco principal",tipo:"Corrente",saldoInicial:0,cor:"#5E7C76"},
+          ]};
+        }
+        // Migração: saldo (antigo, manual) vira saldoInicial (base do cálculo automático)
+        if(d.contas){
+          d = {...d, contas:d.contas.map(c=> c.saldoInicial!==undefined ? c : {...c, saldoInicial: c.saldo||0})};
+        }
+        // Migração: garantir que alavancagem nunca tenha valores nulos/zero críticos
+        if(!d.alavancagem || !d.alavancagem.retirada || !d.alavancagem.rendaDesejada) {
+          d = {...d, alavancagem:{
+            aporteMensal: d.alavancagem?.aporteMensal || 2000,
+            real:         d.alavancagem?.real         || 0.08,
+            rendaDesejada:d.alavancagem?.rendaDesejada|| 8000,
+            retirada:     d.alavancagem?.retirada     || 0.04,
+          }};
+        }
+        setAppData(d);
+      } catch(e) {
+        console.error('Supabase load error:', e);
+        const local = localStorage.getItem('financa_fallback_'+user.id);
+        setAppData(local ? JSON.parse(local) : seedData());
+        setSyncState('error');
+      } finally {
+        setLoading(false);
+      }
+    })();
+  },[user]);
+
+  // 3. Auto-save com debounce de 1.5s
+  const updateData = useCallback((updater)=>{
+    if(!user) return;
+    setAppData(prev=>{
+      const next = typeof updater === 'function' ? updater(prev) : updater;
+      localStorage.setItem('financa_fallback_'+user.id, JSON.stringify(next));
+      clearTimeout(saveTimer.current);
+      setSyncState('syncing');
+      saveTimer.current = setTimeout(async()=>{
+        try {
+          await dbSave(user.id, next);
+          setSyncState('ok');
+        } catch(e) {
+          console.error('Supabase save error:', e);
+          setSyncState('error');
+        }
+      }, 1500);
+      return next;
+    });
+  },[user]);
+
+  async function sair() {
+    await sb.auth.signOut();
+    setAppData(null);
+    setUser(null);
+  }
+
+  // Aguardando verificação da sessão
+  if(!authReady) return React.createElement("div",{className:"loading-screen"},
+    React.createElement("div",{style:{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:16}},
+      React.createElement("div",{style:{width:56,height:56,borderRadius:14,background:'transparent',border:'1px solid rgba(182,160,132,.55)',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Fraunces,serif',fontSize:24,fontWeight:600,color:'#B6A084',marginBottom:4}},"CF"),
+      React.createElement("div",{className:"loading-brand"},"Contabiliza Fácil"),
+      React.createElement("div",{className:"spinner"}),
+      React.createElement("div",{className:"loading-sub"},"Verificando sessão...")
+    )
+  );
+
+  // Não logado — mostra tela de login
+  if(!user) return React.createElement(AuthScreen,{onAuth:setUser});
+
+  // Carregando dados do usuário
+  if(loading||!appData) return React.createElement("div",{className:"loading-screen"},
+    React.createElement("div",{style:{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:16}},
+      React.createElement("div",{style:{width:56,height:56,borderRadius:14,background:'transparent',border:'1px solid rgba(182,160,132,.55)',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Fraunces,serif',fontSize:24,fontWeight:600,color:'#B6A084',marginBottom:4}},"CF"),
+      React.createElement("div",{className:"loading-brand"},"Contabiliza Fácil"),
+      React.createElement("div",{className:"spinner"}),
+      React.createElement("div",{className:"loading-sub"},"Carregando seus dados financeiros...")
+    )
+  );
+
+  return React.createElement(Dashboard, {data:appData, setData:updateData, syncState, user, onSair:sair});
+}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+function Dashboard({data, setData, syncState, user, onSair}) {
+  const [tab, setTab] = useState('painel');
+  const [ano, setAno] = useState(2026);
+  const [periodo, setPeriodo] = useState("Ano inteiro");
+  const [toast, setToast] = useState('');
+  // Subviews do painel
+  const [painelView, setPainelView] = useState(null); // null | {type:'receitas'} | {type:'despesas'} | {type:'categoria',cat:string}
+
+  useEffect(()=>{ if(toast){const t=setTimeout(()=>setToast(''),2200);return()=>clearTimeout(t);} },[toast]);
+
+  const per = PERIODOS.find(p=>p.lab===periodo)||PERIODOS[0];
+  const anos = useMemo(()=>{
+    const s=new Set([2025,2026]);
+    data.lancamentos.forEach(l=>s.add(+l.data.slice(0,4)));
+    return [...s].sort();
+  },[data.lancamentos]);
+
+  const inPeriodo = iso => { const y=+iso.slice(0,4),m=+iso.slice(5,7); return y===ano&&m>=per.s&&m<=per.e; };
+  const lancAno = data.lancamentos.filter(l=>+l.data.slice(0,4)===ano);
+  const lancPer = data.lancamentos.filter(l=>inPeriodo(l.data));
+  const receitas = sum(lancPer.filter(l=>l.tipo==='Receita'),l=>l.valor);
+  const despesas = sum(lancPer.filter(l=>l.tipo==='Despesa'),l=>l.valor);
+  const saldo = receitas - despesas;
+  const invAtual = sum(data.investimentos,i=>i.atual);
+  const invAplic = sum(data.investimentos,i=>i.aplicado);
+
+  const gc = data.gruposCat || {
+    gruposRec:[...DEFAULT_GRUPOS_REC],
+    catsRec:JSON.parse(JSON.stringify(DEFAULT_CATS_REC)),
+    gruposDes:[...DEFAULT_GRUPOS_DES],
+    catsDes:JSON.parse(JSON.stringify(DEFAULT_CATS_DES)),
+  };
+
+  const ctx = {data,setData,ano,setAno,periodo,setPeriodo,per,anos,toast,setToast,
+    receitas,despesas,saldo,invAtual,invAplic,lancAno,lancPer,inPeriodo,sum,
+    painelView,setPainelView,setTab,
+    gruposRec:gc.gruposRec,catsRec:gc.catsRec,
+    gruposDes:gc.gruposDes,catsDes:gc.catsDes,
+    contas:data.contas||[]};
+
+  const ADMIN_EMAIL = 'gabriel.vieira_lino@hotmail.com';
+  const isAdmin = user && user.email === ADMIN_EMAIL;
+  const NAV = [
+    ['painel','Painel',Ic.painel],
+    ['lanc','Lançamentos',Ic.lanc],
+    ['contas','Contas',Ic.contas],
+    ['dre','DRE',Ic.dre],
+    ['inv','Investimentos',Ic.inv],
+    ['metas','Metas',Ic.metas],
+    ['proj','Projeções',Ic.proj],
+    ['grupos','Grupos & Cat.',Ic.grupos],
+    ...(isAdmin ? [['admin','Admin',Ic.admin]] : [])
+  ];
+
+  const syncLabel = {ok:'Sincronizado',syncing:'Salvando...',error:'Erro ao salvar'};
+  const syncColor = {ok:'#4caf50',syncing:null,error:'var(--neg)'};
+
+  return React.createElement("div",{className:"shell"},
+    // Sidebar
+    React.createElement("aside",{className:"sidebar"},
+      React.createElement("div",{className:"brandrow"},
+        React.createElement("div",{className:"brand-logo-wrap"},
+          React.createElement("div",{className:"brand-emblem"},"CF"),
+          React.createElement("div",{className:"brand-text"},
+            React.createElement("div",{className:"brand-name"},"Contabiliza Fácil"),
+            React.createElement("div",{className:"brand-tagline"},"Gestão Financeira Pessoal")
+          )
+        )
+      ),
+      React.createElement("div",{className:"nav-section-label"},"Navegação"),
+      NAV.map(([k,l,I])=>React.createElement("button",{key:k,className:"navbtn "+(tab===k?'active':''),onClick:()=>{setTab(k);setPainelView(null);}},React.createElement(I,null),React.createElement("span",null,l))),
+      React.createElement("div",{className:"sidebar-footer"},
+        React.createElement("div",{className:"sync-indicator"},
+          React.createElement("div",{className:"sync-dot "+(syncState==='ok'?'':'syncing'+(syncState==='error'?' error':''))}),
+          React.createElement("span",null,syncLabel[syncState])
+        ),
+        React.createElement("div",{style:{padding:'4px 12px 8px',fontSize:11,color:'#466074',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',maxWidth:'100%'}},
+          user && user.email
+        ),
+        React.createElement("button",{className:"navbtn",onClick:onSair,style:{color:'#e07070',marginTop:4}},React.createElement(Ic.sair,null),React.createElement("span",null,"Sair")),
+        React.createElement("div",{className:"sidebar-footer-brand"},"© Contabiliza Fácil")
+      )
+    ),
+    // Main
+    React.createElement("main",{className:"main"},
+      tab==='painel' && React.createElement(Painel,{ctx}),
+      tab==='lanc' && React.createElement(Lancamentos,{ctx}),
+      tab==='contas' && React.createElement(ContasCorrente,{ctx}),
+      tab==='dre' && React.createElement(DRE,{ctx}),
+      tab==='inv' && React.createElement(Investimentos,{ctx}),
+      tab==='metas' && React.createElement(Metas,{ctx}),
+      tab==='proj' && React.createElement(Projecoes,{ctx}),
+      tab==='grupos' && React.createElement(GruposCategorias,{ctx}),
+      tab==='admin' && isAdmin && React.createElement(Admin,{user})
+    ),
+    // Mobile nav
+    React.createElement("nav",{className:"mobtab"},
+      NAV.map(([k,l,I])=>React.createElement("button",{key:k,className:tab===k?'active':'',onClick:()=>{setTab(k);setPainelView(null);}},React.createElement(I,null),React.createElement("span",null,l.length>9?l.slice(0,8)+'…':l)))
+    ),
+    toast && React.createElement("div",{className:"toast"},toast)
+  );
+}
+
+/* ============================================================
+   PERIOD CONTROLS + HEADER
+   ============================================================ */
+function PeriodControls({ctx}) {
+  return React.createElement("div",{className:"controls"},
+    React.createElement("div",{className:"selwrap"},React.createElement("label",null,"Ano"),React.createElement("select",{value:ctx.ano,onChange:e=>ctx.setAno(+e.target.value)},ctx.anos.map(a=>React.createElement("option",{key:a},a)))),
+    React.createElement("div",{className:"selwrap"},React.createElement("label",null,"Período"),React.createElement("select",{value:ctx.periodo,onChange:e=>ctx.setPeriodo(e.target.value)},PERIODOS.map(p=>React.createElement("option",{key:p.lab},p.lab))))
+  );
+}
+
+function Header({eyebrow,title,ctx,right}) {
+  return React.createElement("div",{className:"topbar"},
+    React.createElement("div",null,
+      React.createElement("div",{className:"eyebrow"},eyebrow),
+      React.createElement("div",{className:"h-title"},title)
+    ),
+    right || (ctx && React.createElement(PeriodControls,{ctx}))
+  );
+}
+
+/* ============================================================
+   KPI
+   ============================================================ */
+function Kpi({lab,val,cap,color,onClick}) {
+  return React.createElement("div",{className:"card kpi"+(onClick?' clickable':''),onClick,style:{cursor:onClick?'pointer':'default'}},
+    React.createElement("div",{className:"kpi-accent"}),
+    React.createElement("div",{className:"lab"},lab),
+    React.createElement("div",{className:"val",style:{color:color||'var(--navy)'}},val),
+    React.createElement("div",{className:"cap"+(onClick?' cta':'')},onClick?"Ver detalhes →":cap)
+  );
+}
+
+/* ============================================================
+   PAINEL
+   ============================================================ */
+function Painel({ctx}) {
+  const {receitas,despesas,saldo,invAtual,lancPer,ano,per,painelView,setPainelView,setTab} = ctx;
+
+  // Se há subview ativa, renderiza ela
+  if(painelView) {
+    if(painelView.type==='receitas') return React.createElement(MovimentosView,{ctx,tipo:'Receita',onBack:()=>setPainelView(null)});
+    if(painelView.type==='despesas') return React.createElement(MovimentosView,{ctx,tipo:'Despesa',onBack:()=>setPainelView(null)});
+    if(painelView.type==='categoria') return React.createElement(CategoriaView,{ctx,categoria:painelView.cat,onBack:()=>setPainelView(null)});
+  }
+
+  const taxa = receitas>0 ? saldo/receitas : 0;
+  const porCat = {};
+  lancPer.filter(l=>l.tipo==='Despesa').forEach(l=>porCat[l.categoria]=(porCat[l.categoria]||0)+l.valor);
+  const cats = Object.entries(porCat).sort((a,b)=>b[1]-a[1]);
+  const maxCat = cats.length ? cats[0][1] : 1;
+  const lider = cats.length ? cats[0][0] : '—';
+
+  const mens = MESES.map((m,i)=>{
+    const r = ctx.data.lancamentos.filter(l=>+l.data.slice(0,4)===ano&&+l.data.slice(5,7)===i+1);
+    return {m, rec:sum(r.filter(x=>x.tipo==='Receita'),x=>x.valor), des:sum(r.filter(x=>x.tipo==='Despesa'),x=>x.valor)};
+  });
+  const maxMens = Math.max(1,...mens.map(x=>Math.max(x.rec,x.des)));
+  const buckets = bucketsFor(per,ano,ctx.data.lancamentos,sum);
+
+  const contasSaldo = (ctx.data.contas||[]).reduce((tot,c)=>{
+    if(!c) return tot;
+    const ini = Number(c.saldoInicial!==undefined?c.saldoInicial:(c.saldo||0)) || 0;
+    const mov = (ctx.data.lancamentos||[]).filter(l=>l && l.conta===c.nome).reduce((s,l)=>{
+      const v = Number(l.valor) || 0;
+      if(l.tipo==='Receita') return s+v;
+      if(l.tipo==='Despesa') return s-v;
+      if(l.tipo==='Investimento') return s+(/resgate|venda/i.test(l.categoria||'')?v:-v);
+      return s;
+    },0);
+    const r = tot+ini+mov;
+    return Number.isFinite(r)?r:tot;
+  },0);
+
+  return React.createElement(React.Fragment,null,
+    React.createElement(Header,{eyebrow:"Painel · análise por período",title:"Visão Geral",ctx}),
+    // Welcome banner
+    React.createElement("div",{style:{
+      background:'linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%)',
+      borderRadius:'var(--radius)',padding:'20px 24px',marginBottom:18,
+      display:'flex',alignItems:'center',justifyContent:'space-between',gap:16,
+      boxShadow:'0 8px 24px rgba(13,31,53,.18)',position:'relative',overflow:'hidden',
+    }},
+      React.createElement("div",{style:{position:'absolute',right:-30,top:-30,width:180,height:180,borderRadius:'50%',background:'rgba(156,132,102,.08)',pointerEvents:'none'}}),
+      React.createElement("div",{style:{position:'relative'}},
+        React.createElement("div",{style:{color:'rgba(255,255,255,.55)',fontSize:11,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',marginBottom:4}},"Contabiliza Fácil"),
+        React.createElement("div",{style:{color:'#fff',fontFamily:'Fraunces,serif',fontSize:18,fontWeight:600,lineHeight:1.3}},"Sua gestão financeira pessoal"),
+        React.createElement("div",{style:{color:'rgba(255,255,255,.5)',fontSize:12,marginTop:4}},
+          "Acompanhe receitas, despesas e metas em tempo real"
+        )
+      ),
+      React.createElement("div",{style:{display:'flex',gap:8,flexShrink:0}},
+        React.createElement("div",{style:{width:42,height:42,borderRadius:10,background:'rgba(255,255,255,.06)',border:'1px solid rgba(255,255,255,.12)',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Fraunces,serif',fontSize:17,color:'rgba(255,255,255,.85)'}},"CF")
+      )
+    ),
+    React.createElement("div",{className:"kpis"},
+      React.createElement(Kpi,{lab:"Receitas no período",val:fmtBRL(receitas),cap:"entradas no intervalo",color:"var(--pos)",onClick:()=>setPainelView({type:'receitas'})}),
+      React.createElement(Kpi,{lab:"Despesas no período",val:fmtBRL(despesas),cap:"saídas no intervalo",color:"var(--neg)",onClick:()=>setPainelView({type:'despesas'})}),
+      React.createElement(Kpi,{lab:"Saldo do período",val:fmtBRL(saldo),cap:"receitas − despesas",color:"var(--navy)"}),
+      React.createElement(Kpi,{lab:"Taxa de poupança",val:fmtPct(taxa),cap:"parcela da renda preservada",color:"var(--teal)"})
+    ),
+    React.createElement("div",{className:"kpis"},
+      React.createElement(Kpi,{lab:"Lançamentos",val:lancPer.length,cap:"ver todos os lançamentos →",color:"var(--navy)",onClick:()=>setTab('lanc')}),
+      React.createElement(Kpi,{lab:"Categoria líder",val:React.createElement("span",{style:{fontSize:18}},lider),cap:"maior despesa",color:"var(--teal)",onClick:lider!=='—'?()=>setPainelView({type:'categoria',cat:lider}):null}),
+      React.createElement(Kpi,{lab:"Saldo em contas",val:fmtBRL(contasSaldo),cap:"ver contas correntes →",color:contasSaldo>=0?"var(--navy)":"var(--neg)",onClick:()=>setTab('contas')}),
+      React.createElement(Kpi,{lab:"Situação",val:saldo>=0?'Superávit':'Déficit',cap:saldo>=0?'período positivo':'atenção ao período',color:saldo>=0?'var(--pos)':'var(--neg)'})
+    ),
+    React.createElement("div",{className:"grid2"},
+      // Despesas por categoria
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},"Despesas por categoria — período"),
+        React.createElement("table",null,React.createElement("tbody",null,
+          cats.length ? cats.map(([c,v])=>React.createElement("tr",{key:c,style:{cursor:'pointer'},onClick:()=>setPainelView({type:'categoria',cat:c})},
+            React.createElement("td",null,c,React.createElement("span",{style:{fontSize:10,color:'var(--teal)',marginLeft:6}},"\u2197")),
+            React.createElement("td",{className:"r num",style:{width:110}},fmtBRL(v)),
+            React.createElement("td",{style:{width:120}},React.createElement("div",{className:"bar"},React.createElement("i",{style:{width:v/maxCat*100+'%',background:'var(--gold)'}})))
+          )) : React.createElement("tr",null,React.createElement("td",{className:"empty",colSpan:"3"},"Sem despesas no período."))
+        ))
+      ),
+      // Comparativo
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},"Comparativo por período (",per.g,")"),
+        React.createElement("table",null,
+          React.createElement("thead",null,React.createElement("tr",null,React.createElement("th",null,"Período"),React.createElement("th",{className:"r"},"Receitas"),React.createElement("th",{className:"r"},"Despesas"),React.createElement("th",{className:"r"},"Saldo"))),
+          React.createElement("tbody",null,buckets.map((b,i)=>React.createElement("tr",{key:i},
+            React.createElement("td",null,b.lab),
+            React.createElement("td",{className:"r num"},fmtBRL(b.rec)),
+            React.createElement("td",{className:"r num"},fmtBRL(b.des)),
+            React.createElement("td",{className:"r num",style:{fontWeight:700,color:b.rec-b.des>=0?'var(--pos)':'var(--neg)'}},fmtBRL(b.rec-b.des))
+          )))
+        )
+      )
+    ),
+    // Gráfico mensal melhorado
+    React.createElement("div",{className:"card panel"},
+      React.createElement("div",{className:"sec-h"},"Receitas e despesas por mês — ",ano),
+      React.createElement("div",{style:{padding:'6px 16px 16px'}},
+        React.createElement("div",{style:{overflowX:'auto'}},
+          React.createElement("div",{style:{display:'grid',gridTemplateColumns:'repeat(12,1fr)',gap:4,alignItems:'end',minHeight:180,paddingTop:24,position:'relative'}},
+            mens.map((x,i)=>{
+              const saldoM=x.rec-x.des;
+              const maxV=Math.max(maxMens,1);
+              const rH=Math.round(x.rec/maxV*140);
+              const dH=Math.round(x.des/maxV*140);
+              return React.createElement("div",{key:i,style:{display:'flex',flexDirection:'column',alignItems:'center',gap:2}},
+                React.createElement("div",{style:{fontSize:9,color:saldoM>=0?'var(--pos)':'var(--neg)',fontWeight:700,marginBottom:2,textAlign:'center',height:14,lineHeight:'14px'}},
+                  (x.rec||x.des)?fmtBRL(saldoM,0).replace('R$ ','').replace('-R$ ','-'):''
+                ),
+                React.createElement("div",{style:{display:'flex',gap:2,alignItems:'flex-end',height:140}},
+                  React.createElement("div",{style:{width:14,height:rH+'px',background:'var(--pos)',borderRadius:'4px 4px 0 0',transition:'height .5s',cursor:'default',minHeight:x.rec>0?2:0},title:'Receitas: '+fmtBRL(x.rec)}),
+                  React.createElement("div",{style:{width:14,height:dH+'px',background:'var(--neg)',borderRadius:'4px 4px 0 0',transition:'height .5s',cursor:'default',minHeight:x.des>0?2:0},title:'Despesas: '+fmtBRL(x.des)})
+                ),
+                React.createElement("div",{style:{fontSize:10,color:'var(--muted)',fontWeight:600,marginTop:4}},x.m)
+              );
+            })
+          )
+        ),
+        React.createElement("div",{style:{display:'flex',gap:18,padding:'10px 4px 4px',fontSize:12,color:'var(--muted)'}},
+          React.createElement("span",null,React.createElement("i",{style:{display:'inline-block',width:10,height:10,background:'var(--pos)',borderRadius:2,marginRight:6}}),"Receitas"),
+          React.createElement("span",null,React.createElement("i",{style:{display:'inline-block',width:10,height:10,background:'var(--neg)',borderRadius:2,marginRight:6}}),"Despesas"),
+          React.createElement("span",{style:{marginLeft:'auto',fontSize:11}},
+            React.createElement("b",{style:{color:'var(--pos)'}},"Entradas: "+fmtBRL(sum(mens,x=>x.rec))),
+            React.createElement("span",{style:{margin:'0 8px',opacity:.4}},"|"),
+            React.createElement("b",{style:{color:'var(--neg)'}},"Saídas: "+fmtBRL(sum(mens,x=>x.des)))
+          )
+        )
+      )
+    )
+  );
+}
+
+/* ============================================================
+   SUBVIEW: MOVIMENTOS (receitas ou despesas)
+   ============================================================ */
+function MovimentosView({ctx,tipo,onBack}) {
+  const {lancPer,per,ano} = ctx;
+  const lista = [...lancPer.filter(l=>l.tipo===tipo)].sort((a,b)=>b.data.localeCompare(a.data));
+  const total = sum(lista,l=>l.valor);
+  const color = tipo==='Receita'?'var(--pos)':'var(--neg)';
+
+  return React.createElement(React.Fragment,null,
+    React.createElement("div",{className:"back-btn",onClick:onBack},React.createElement(Ic.back,{width:14,height:14}),React.createElement("span",null,"Voltar ao painel")),
+    React.createElement(Header,{eyebrow:`${tipo}s · ${per.lab} ${ano}`,title:`${tipo}s do período`}),
+    React.createElement("div",{className:"kpis"},
+      React.createElement(Kpi,{lab:`Total de ${tipo.toLowerCase()}s`,val:fmtBRL(total),cap:`${lista.length} lançamento(s)`,color}),
+      React.createElement(Kpi,{lab:"Maior valor",val:lista.length?fmtBRL(Math.max(...lista.map(l=>l.valor))):fmtBRL(0),cap:"lançamento de maior valor",color:"var(--navy)"}),
+      React.createElement(Kpi,{lab:"Média por lançamento",val:lista.length?fmtBRL(total/lista.length):fmtBRL(0),cap:"valor médio",color:"var(--teal)"}),
+      React.createElement(Kpi,{lab:"Quantidade",val:lista.length,cap:"lançamentos no período",color:"var(--navy)"})
+    ),
+    React.createElement("div",{className:"card panel"},
+      React.createElement("div",{className:"sec-h"},tipo==='Receita'?"Entradas no período":"Saídas no período"),
+      React.createElement("table",null,
+        React.createElement("thead",null,React.createElement("tr",null,
+          React.createElement("th",null,"Data"),React.createElement("th",null,"Categoria"),React.createElement("th",null,"Descrição"),React.createElement("th",null,"Forma"),React.createElement("th",{className:"r"},"Valor")
+        )),
+        React.createElement("tbody",null,
+          lista.length ? lista.map(l=>React.createElement("tr",{key:l.id},
+            React.createElement("td",{className:"num"},l.data.split('-').reverse().join('/')),
+            React.createElement("td",null,l.categoria,React.createElement("div",{style:{fontSize:11,color:'var(--muted)'}},l.grupo)),
+            React.createElement("td",null,l.descricao),
+            React.createElement("td",{style:{color:'var(--muted)'}},l.forma),
+            React.createElement("td",{className:"r num",style:{fontWeight:600,color}},fmtBRL(l.valor,2))
+          )) : React.createElement("tr",null,React.createElement("td",{className:"empty",colSpan:5},"Nenhum lançamento neste período."))
+        )
+      )
+    )
+  );
+}
+
+/* ============================================================
+   SUBVIEW: CATEGORIA DETALHADA
+   ============================================================ */
+function CategoriaView({ctx,categoria,onBack}) {
+  const {data,ano,per,inPeriodo} = ctx;
+  const todos = data.lancamentos.filter(l=>l.categoria===categoria);
+  const noPeriodo = todos.filter(l=>inPeriodo(l.data)).sort((a,b)=>b.data.localeCompare(a.data));
+  const totalPer = sum(noPeriodo,l=>l.valor);
+  const totalAll = sum(todos,l=>l.valor);
+  const tipo = noPeriodo.length ? noPeriodo[0].tipo : todos.length ? todos[0].tipo : 'Despesa';
+  const color = tipo==='Receita'?'var(--pos)':'var(--neg)';
+
+  // histórico mensal para esta categoria
+  const hist = MESES.map((m,i)=>{
+    const v = sum(data.lancamentos.filter(l=>l.categoria===categoria&&+l.data.slice(0,4)===ano&&+l.data.slice(5,7)===i+1),l=>l.valor);
+    return {m,v};
+  });
+  const maxHist = Math.max(1,...hist.map(h=>h.v));
+
+  return React.createElement(React.Fragment,null,
+    React.createElement("div",{className:"back-btn",onClick:onBack},React.createElement(Ic.back,{width:14,height:14}),React.createElement("span",null,"Voltar ao painel")),
+    React.createElement("div",{className:"cat-detail-header"},
+      React.createElement("div",{className:"eyebrow",style:{color:'var(--gold-lt)',marginBottom:6}},tipo.toUpperCase()+" · "+per.lab+" "+ano),
+      React.createElement("div",{className:"h-title",style:{color:'#fff',fontSize:26}},categoria)
+    ),
+    React.createElement("div",{className:"kpis"},
+      React.createElement(Kpi,{lab:"Total no período",val:fmtBRL(totalPer),cap:`${noPeriodo.length} lançamento(s)`,color}),
+      React.createElement(Kpi,{lab:"Total histórico",val:fmtBRL(totalAll),cap:"todos os lançamentos",color:"var(--navy)"}),
+      React.createElement(Kpi,{lab:"Média mensal",val:fmtBRL(totalAll/12),cap:`baseado em ${ano}`,color:"var(--teal)"}),
+      React.createElement(Kpi,{lab:"Maior mês",val:maxHist>0?fmtBRL(maxHist):fmtBRL(0),cap:"em "+ano,color:"var(--gold)"})
+    ),
+    React.createElement("div",{className:"grid2"},
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},"Lançamentos no período"),
+        React.createElement("table",null,
+          React.createElement("thead",null,React.createElement("tr",null,React.createElement("th",null,"Data"),React.createElement("th",null,"Descrição"),React.createElement("th",null,"Forma"),React.createElement("th",{className:"r"},"Valor"))),
+          React.createElement("tbody",null,
+            noPeriodo.length ? noPeriodo.map(l=>React.createElement("tr",{key:l.id},
+              React.createElement("td",{className:"num"},l.data.split('-').reverse().join('/')),
+              React.createElement("td",null,l.descricao||'—'),
+              React.createElement("td",{style:{color:'var(--muted)'}},l.forma),
+              React.createElement("td",{className:"r num",style:{fontWeight:600,color}},fmtBRL(l.valor,2))
+            )) : React.createElement("tr",null,React.createElement("td",{className:"empty",colSpan:4},"Nenhum lançamento neste período."))
+          )
+        )
+      ),
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},"Evolução mensal em ",ano),
+        React.createElement("div",{style:{padding:'10px 10px 6px'}},
+          React.createElement("div",{className:"barchart"},
+            hist.map((h,i)=>React.createElement("div",{className:"col",key:i},
+              React.createElement("div",{className:"bars"},
+                React.createElement("span",{style:{height:h.v/maxHist*120+'px',background:color,width:'70%'},title:fmtBRL(h.v)})
+              ),
+              React.createElement("div",{className:"mlab"},h.m)
+            ))
+          )
+        )
+      )
+    )
+  );
+}
+
+function bucketsFor(per,ano,lanc,sumFn) {
+  let ranges=[];
+  if(per.g==='Anual') ranges=[[1,12,'Ano inteiro']];
+  else if(per.g==='Semestral') ranges=[[1,6,'1º sem.'],[7,12,'2º sem.']];
+  else if(per.g==='Trimestral') ranges=[[1,3,'T1'],[4,6,'T2'],[7,9,'T3'],[10,12,'T4']];
+  else ranges=MESES.map((m,i)=>[i+1,i+1,m]);
+  return ranges.map(([s,e,lab])=>{
+    const sel=lanc.filter(l=>+l.data.slice(0,4)===ano&&+l.data.slice(5,7)>=s&&+l.data.slice(5,7)<=e);
+    return {lab,rec:sumFn(sel.filter(x=>x.tipo==='Receita'),x=>x.valor),des:sumFn(sel.filter(x=>x.tipo==='Despesa'),x=>x.valor)};
+  });
+}
+
+/* ============================================================
+   LANÇAMENTOS
+   ============================================================ */
+function Lancamentos({ctx}) {
+  const {data,setData,setToast,contas} = ctx;
+  const [open,setOpen] = useState(false);
+  const [editLanc,setEditLanc] = useState(null);
+  const [imp,setImp] = useState(false);
+  const fileRef = useRef();
+  const [filtro,setFiltro] = useState('Todos');
+  const [busca,setBusca] = useState('');
+  const [filtroConta,setFiltroConta] = useState('Todas');
+  const [filtroMes,setFiltroMes] = useState('Todos');
+  const [filtroGrupo,setFiltroGrupo] = useState('Todos');
+  const [filtroAno,setFiltroAno] = useState('Todos');
+
+  const anosDisp = [...new Set(data.lancamentos.map(l=>l.data.slice(0,4)))].sort().reverse();
+  const gruposDisp = [...new Set(data.lancamentos.map(l=>l.grupo).filter(Boolean))].sort();
+
+  const lista = [...data.lancamentos]
+    .sort((a,b)=>b.data.localeCompare(a.data))
+    .filter(l=>filtro==='Todos'||l.tipo===filtro)
+    .filter(l=>filtroConta==='Todas'||l.conta===filtroConta)
+    .filter(l=>filtroAno==='Todos'||l.data.slice(0,4)===filtroAno)
+    .filter(l=>filtroMes==='Todos'||l.data.slice(5,7)===filtroMes)
+    .filter(l=>filtroGrupo==='Todos'||l.grupo===filtroGrupo)
+    .filter(l=>!busca||l.descricao?.toLowerCase().includes(busca.toLowerCase())||l.categoria?.toLowerCase().includes(busca.toLowerCase()));
+
+  const totFiltrado = sum(lista, l=> l.tipo==='Receita'? l.valor : -l.valor);
+
+  function remover(id) {
+    setData(d=>({...d,lancamentos:d.lancamentos.filter(x=>x.id!==id)}));
+    setToast('Lançamento removido');
+  }
+  function addLanc(l) {
+    setData(d=>{
+      const lancamentos=[...d.lancamentos,{...l,id:uid()}];
+      let investimentos=d.investimentos;
+      if(l.tipo==='Investimento'){ investimentos=aplicarNaCarteira(d.investimentos,l); }
+      return {...d,lancamentos,investimentos};
+    });
+    setToast(l.tipo==='Investimento'?'Investimento lançado e carteira atualizada':'Lançamento adicionado');
+  }
+  function editarLanc(l) {
+    setData(d=>{
+      const antigo=d.lancamentos.find(x=>x.id===l.id);
+      let investimentos=d.investimentos;
+      // se virou investimento (ou já era e mudou de valor), reaplica de forma simples:
+      // remove efeito antigo se era investimento e aplica o novo
+      if(antigo && antigo.tipo==='Investimento'){
+        investimentos=aplicarNaCarteira(investimentos,{...antigo,categoria:'Resgate / Venda',cotas:antigo.cotas,valor:antigo.valor});
+      }
+      if(l.tipo==='Investimento'){
+        investimentos=aplicarNaCarteira(investimentos,l);
+      }
+      return {...d,lancamentos:d.lancamentos.map(x=>x.id===l.id?l:x),investimentos};
+    });
+    setToast('Lançamento atualizado');
+  }
+  function handleFile(e) {
+    const f=e.target.files[0]; if(!f)return;
+    const reader=new FileReader();
+    // Tenta UTF-8 primeiro, se tiver caracteres estranhos tenta latin1
+    reader.onload=ev=>{
+      let text = ev.target.result;
+      // Detecta se tem encoding ruim (latin1/windows-1252 lido como utf-8)
+      if(text.includes('â€') || text.includes('Ã') || text.includes('Ã§') || text.includes('\uFFFD')) {
+        // Re-lê como latin1 (ISO-8859-1 / Windows-1252)
+        const r2=new FileReader();
+        r2.onload=ev2=>importCSV(ev2.target.result);
+        r2.readAsText(f,'windows-1252');
+      } else {
+        importCSV(text);
+      }
+    };
+    reader.readAsText(f,'utf-8');
+    e.target.value='';
+  }
+  function importCSV(text) {
+    const linhas=text.split(/\r?\n/).filter(x=>x.trim());
+    if(!linhas.length){setToast('Arquivo vazio');return;}
+    const sep=(linhas[0].match(/;/g)||[]).length>(linhas[0].match(/,/g)||[]).length?';':',';
+    const head=linhas[0].toLowerCase().replace(/^\uFEFF/,'').split(sep).map(s=>s.trim().replace(/^"|"$/g,''));
+    const idx=(...names)=>{for(const n of names){const i=head.indexOf(n);if(i>=0)return i;}return -1;};
+    const iData=idx('data','date'),iTipo=idx('tipo','type'),iGrupo=idx('grupo','group'),
+      iCat=idx('categoria','category'),iDesc=idx('descricao','descrição','description','histórico','historico','hist','memo'),
+      iForma=idx('forma','meio'),iValor=idx('valor','value','amount','debito','crédito','credito');
+    if(iData<0||iValor<0){setToast('CSV precisa ter ao menos colunas Data e Valor');return;}
+    const novos=[];
+    for(let k=1;k<linhas.length;k++){
+      const c=splitCSV(linhas[k],sep);
+      if(c.length<2)continue;
+      let dataISO=normData(c[iData]);
+      if(!dataISO)continue;
+      let valorRaw=c[iValor]||'0';
+      let valor=parseFloat(valorRaw.replace(/[^\d,.-]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.'))||0;
+      let tipo=iTipo>=0?(/(inv)/i.test(c[iTipo])?'Investimento':/(rec|cred|entrad|\+)/i.test(c[iTipo])?'Receita':'Despesa'):valor>=0?'Receita':'Despesa';
+      valor=Math.abs(valor);
+      novos.push({id:uid(),data:dataISO,tipo,grupo:iGrupo>=0?c[iGrupo]:'Outros',
+        categoria:iCat>=0&&c[iCat]?c[iCat]:tipo==='Receita'?'Outras receitas 1':'Imprevistos',
+        descricao:iDesc>=0?c[iDesc]:'',forma:iForma>=0?c[iForma]:'',valor});
+    }
+    if(!novos.length){setToast('Nenhuma linha válida encontrada');return;}
+    setData(d=>({...d,lancamentos:[...d.lancamentos,...novos]}));
+    setImp(false);
+    setToast(novos.length+' lançamentos importados');
+  }
+  function baixarModelo() {
+    const csv="\uFEFFdata;tipo;grupo;categoria;descricao;forma;valor\n2026-04-05;Receita;Trabalho;Salário CLT;Salário;Transferência;8500\n2026-04-06;Despesa;Moradia;Aluguel / Financiamento;Aluguel;Boleto;2200\n2026-04-10;Investimento;Investimentos;Aplicação;Compra ITSA4;Transferência;1500\n";
+    const a=document.createElement('a');
+    a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+    a.download='modelo_lancamentos.csv';a.click();
+  }
+
+  return React.createElement(React.Fragment,null,
+    React.createElement(Header,{eyebrow:"Movimentações · por data",title:"Lançamentos",ctx,
+      right:React.createElement("div",{className:"controls"},
+        React.createElement("button",{className:"btn btn-ghost",onClick:()=>setImp(true)},React.createElement(Ic.up,{width:"16",height:"16"}),"Importar CSV"),
+        React.createElement("button",{className:"btn btn-primary",onClick:()=>setOpen(true)},React.createElement(Ic.plus,{width:"16",height:"16"}),"Novo lançamento")
+      )
+    }),
+    React.createElement("div",{style:{display:'flex',gap:8,marginBottom:14,alignItems:'center',flexWrap:'wrap'}},
+      ['Todos','Receita','Despesa','Investimento'].map(f=>React.createElement("button",{key:f,className:"chip "+(filtro===f?'on':''),onClick:()=>setFiltro(f)},f)),
+      React.createElement("select",{value:filtroAno,onChange:e=>setFiltroAno(e.target.value),style:{padding:'7px 12px',border:'1px solid var(--line)',borderRadius:10,fontSize:13,outline:'none',background:'#fff',fontWeight:600,color:'var(--navy)'}},
+        React.createElement("option",{value:"Todos"},"Todos os anos"),
+        anosDisp.map(a=>React.createElement("option",{key:a,value:a},a))
+      ),
+      React.createElement("select",{value:filtroMes,onChange:e=>setFiltroMes(e.target.value),style:{padding:'7px 12px',border:'1px solid var(--line)',borderRadius:10,fontSize:13,outline:'none',background:'#fff',fontWeight:600,color:'var(--navy)'}},
+        React.createElement("option",{value:"Todos"},"Todos os meses"),
+        MESES.map((m,i)=>React.createElement("option",{key:m,value:String(i+1).padStart(2,'0')},m))
+      ),
+      React.createElement("select",{value:filtroGrupo,onChange:e=>setFiltroGrupo(e.target.value),style:{padding:'7px 12px',border:'1px solid var(--line)',borderRadius:10,fontSize:13,outline:'none',background:'#fff',fontWeight:600,color:'var(--navy)'}},
+        React.createElement("option",{value:"Todos"},"Todos os grupos"),
+        gruposDisp.map(g=>React.createElement("option",{key:g,value:g},g))
+      ),
+      (contas||[]).length>1 && React.createElement("select",{value:filtroConta,onChange:e=>setFiltroConta(e.target.value),style:{padding:'7px 12px',border:'1px solid var(--line)',borderRadius:10,fontSize:13,outline:'none',background:'#fff',fontWeight:600,color:'var(--navy)'}},
+        React.createElement("option",{value:"Todas"},"Todas as contas"),
+        (contas||[]).map(c=>React.createElement("option",{key:c.id,value:c.nome},c.nome))
+      ),
+      React.createElement("input",{placeholder:"Buscar por descrição ou categoria...",value:busca,onChange:e=>setBusca(e.target.value),style:{padding:'7px 12px',border:'1px solid var(--line)',borderRadius:10,fontSize:13,outline:'none',minWidth:200,flex:1}}),
+      (filtro!=='Todos'||filtroAno!=='Todos'||filtroMes!=='Todos'||filtroGrupo!=='Todos'||filtroConta!=='Todas'||busca) && React.createElement("button",{className:"chip",onClick:()=>{setFiltro('Todos');setFiltroAno('Todos');setFiltroMes('Todos');setFiltroGrupo('Todos');setFiltroConta('Todas');setBusca('');}},"Limpar filtros"),
+      React.createElement("span",{className:"note"},lista.length," registro(s) · saldo ",fmtBRL(totFiltrado))
+    ),
+    React.createElement("div",{className:"card panel"},
+      React.createElement("table",null,
+        React.createElement("thead",null,React.createElement("tr",null,
+          React.createElement("th",null,"Data"),React.createElement("th",null,"Tipo"),React.createElement("th",null,"Categoria"),
+          React.createElement("th",null,"Descrição"),React.createElement("th",null,"Conta"),React.createElement("th",null,"Forma"),React.createElement("th",{className:"r"},"Valor"),React.createElement("th",null)
+        )),
+        React.createElement("tbody",null,
+          lista.length ? lista.map(l=>{const tc={Receita:'var(--pos)',Despesa:'var(--neg)',Investimento:'var(--teal)'};const tt={Receita:'rec',Despesa:'des',Investimento:'inv'};return React.createElement("tr",{key:l.id,style:{cursor:'pointer'},onClick:()=>setEditLanc(l)},
+            React.createElement("td",{className:"num"},l.data.split('-').reverse().join('/')),
+            React.createElement("td",null,React.createElement("span",{className:"tag "+(tt[l.tipo]||'des')},l.tipo)),
+            React.createElement("td",null,l.categoria,React.createElement("div",{style:{fontSize:11,color:'var(--muted)'}},l.grupo)),
+            React.createElement("td",null,l.descricao),
+            React.createElement("td",{style:{fontSize:11,color:'var(--muted)'}},l.conta||'—'),
+            React.createElement("td",{style:{color:'var(--muted)'}},l.forma),
+            React.createElement("td",{className:"r num",style:{fontWeight:600,color:tc[l.tipo]||'var(--neg)'}},fmtBRL(l.valor,2)),
+            React.createElement("td",{className:"r"},React.createElement("button",{onClick:e=>{e.stopPropagation();remover(l.id);},style:{color:'var(--muted)',fontSize:18,lineHeight:1}},"×"))
+          );}) : React.createElement("tr",null,React.createElement("td",{className:"empty",colSpan:"8"},"Nenhum lançamento encontrado."))
+        )
+      )
+    ),
+    open && React.createElement(LancModal,{onClose:()=>setOpen(false),onSave:l=>{addLanc(l);setOpen(false);},ctx}),
+    editLanc && React.createElement(LancModal,{onClose:()=>setEditLanc(null),onSave:l=>{editarLanc(l);setEditLanc(null);},ctx,lancamento:editLanc,modoEdicao:true}),
+    imp && React.createElement(ImportModal,{onClose:()=>setImp(false),onPick:()=>fileRef.current.click(),onModelo:baixarModelo}),
+    React.createElement("input",{ref:fileRef,type:"file",accept:".csv,text/csv",style:{display:'none'},onChange:handleFile})
+  );
+}
+
+function splitCSV(line,sep){const out=[];let cur='',q=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'){q=!q;continue;}if(ch===sep&&!q){out.push(cur.trim());cur='';continue;}cur+=ch;}out.push(cur.trim());return out;}
+function normData(s){if(!s)return null;s=s.trim();let m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m)return`${m[1]}-${m[2]}-${m[3]}`;m=s.match(/^(\d{1,2})[\/\.](\d{1,2})[\/\.](\d{2,4})/);if(m){let y=m[3];if(y.length===2)y='20'+y;return`${y}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;}return null;}
+
+function ImportModal({onClose,onPick,onModelo}) {
+  return React.createElement("div",{className:"modal-bg",onClick:onClose},
+    React.createElement("div",{className:"modal",onClick:e=>e.stopPropagation()},
+      React.createElement("div",{className:"modal-h"},React.createElement("h3",{style:{color:'var(--navy)'}},"Importar movimentações (CSV)"),React.createElement("button",{onClick:onClose,style:{fontSize:22,color:'var(--muted)'}},"×")),
+      React.createElement("div",{className:"modal-b"},
+        React.createElement("p",{style:{fontSize:14,lineHeight:1.6,marginBottom:14}},"Envie um arquivo CSV exportado do seu banco ou planilha. O sistema reconhece colunas como ",React.createElement("code",null,"data"),", ",React.createElement("code",null,"tipo"),", ",React.createElement("code",null,"valor")," etc."),
+        React.createElement("ul",{style:{fontSize:13,color:'var(--muted)',lineHeight:1.7,margin:'0 0 18px 18px'}},
+          React.createElement("li",null,"Datas em ",React.createElement("code",null,"AAAA-MM-DD")," ou ",React.createElement("code",null,"DD/MM/AAAA")),
+          React.createElement("li",null,"Separador vírgula ou ponto-e-vírgula"),
+          React.createElement("li",null,"Valores negativos → Despesa, positivos → Receita")
+        ),
+        React.createElement("div",{style:{display:'flex',gap:10}},
+          React.createElement("button",{className:"btn btn-primary",onClick:onPick},React.createElement(Ic.up,{width:"16",height:"16"}),"Escolher arquivo CSV"),
+          React.createElement("button",{className:"btn btn-ghost",onClick:onModelo},"Baixar modelo")
+        )
+      )
+    )
+  );
+}
+
+function LancModal({onClose,onSave,ctx,lancamento,modoEdicao}) {
+  const gruposRec = (ctx&&ctx.gruposRec)||DEFAULT_GRUPOS_REC;
+  const catsRec = (ctx&&ctx.catsRec)||DEFAULT_CATS_REC;
+  const gruposDes = (ctx&&ctx.gruposDes)||DEFAULT_GRUPOS_DES;
+  const catsDes = (ctx&&ctx.catsDes)||DEFAULT_CATS_DES;
+  const contasDisp = (ctx&&ctx.contas)||[];
+  const initTipo = lancamento?.tipo||'Despesa';
+  const initGrupo = lancamento?.grupo||(initTipo==='Receita'?gruposRec[0]:gruposDes[0]);
+  const [f,setF] = useState({
+    data:lancamento?.data||todayISO(),
+    tipo:initTipo,
+    grupo:initGrupo,
+    categoria:lancamento?.categoria||(initTipo==='Receita'?catsRec[initGrupo]?.[0]||'':catsDes[initGrupo]?.[0]||''),
+    descricao:lancamento?.descricao||'',
+    forma:lancamento?.forma||'Pix',
+    conta:lancamento?.conta||'',
+    valor:lancamento?.valor||'',
+    ativo:lancamento?.ativo||'',
+    ticker:lancamento?.ticker||'',
+    classe:lancamento?.classe||CLASSES_INV[0],
+    cotas:lancamento?.cotas||'',
+    catInv:lancamento?.catInv||CATS_INV[0],
+    ...(modoEdicao&&lancamento?{id:lancamento.id}:{})
+  });
+  const isInv = f.tipo==='Investimento';
+  const grupos = f.tipo==='Receita'?gruposRec:gruposDes;
+  const cats = (f.tipo==='Receita'?catsRec:catsDes)[f.grupo]||[];
+  function set(k,v){setF(s=>{const n={...s,[k]:v};if(k==='tipo'&&v!=='Investimento'){const g=(v==='Receita'?gruposRec:gruposDes)[0];n.grupo=g;n.categoria=(v==='Receita'?catsRec:catsDes)[g]?.[0]||'';}if(k==='grupo'){n.categoria=((s.tipo==='Receita'?catsRec:catsDes)[v]||[''])[0];}return n;});}
+  function salvar(){
+    const v=parseFloat(String(f.valor).replace(',','.'))||0;
+    if(v<=0)return;
+    if(isInv && !f.ativo && !f.ticker){ return; }
+    const payload = isInv
+      ? {...f, valor:v, grupo:'Investimentos', categoria:f.catInv||'Compra de ativo',
+         descricao: f.descricao || ((/resgate|venda/i.test(f.catInv)?'Resgate ':'Compra ')+(f.ativo||f.ticker)),
+         cotas: parseFloat(String(f.cotas).replace(',','.'))||0}
+      : {...f, valor:v};
+    onSave(payload);
+  }
+  return React.createElement("div",{className:"modal-bg",onClick:onClose},
+    React.createElement("div",{className:"modal",onClick:e=>e.stopPropagation()},
+      React.createElement("div",{className:"modal-h"},React.createElement("h3",{style:{color:'var(--navy)'}},modoEdicao?"Editar lançamento":"Novo lançamento"),React.createElement("button",{onClick:onClose,style:{fontSize:22,color:'var(--muted)'}},"×")),
+      React.createElement("div",{className:"modal-b"},
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Data"),React.createElement("input",{type:"date",value:f.data,onChange:e=>set('data',e.target.value)})),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Tipo"),React.createElement("select",{value:f.tipo,onChange:e=>set('tipo',e.target.value)},
+            React.createElement("option",null,"Despesa"),React.createElement("option",null,"Receita"),React.createElement("option",null,"Investimento")))
+        ),
+        !isInv && React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Grupo"),React.createElement("select",{value:f.grupo,onChange:e=>set('grupo',e.target.value)},grupos.map(g=>React.createElement("option",{key:g},g)))),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Categoria"),React.createElement("select",{value:f.categoria,onChange:e=>set('categoria',e.target.value)},cats.map(c=>React.createElement("option",{key:c},c))))
+        ),
+        isInv && React.createElement(React.Fragment,null,
+          React.createElement("div",{className:"row2"},
+            React.createElement("div",{className:"field"},React.createElement("label",null,"Ativo"),React.createElement("input",{value:f.ativo,onChange:e=>set('ativo',e.target.value),placeholder:"Ex.: ITSA4, Tesouro Selic 2029",list:"ativos-existentes"}),
+              React.createElement("datalist",{id:"ativos-existentes"},((ctx&&ctx.data&&ctx.data.investimentos)||[]).map(i=>React.createElement("option",{key:i.id,value:i.ativo})))
+            ),
+            React.createElement("div",{className:"field"},React.createElement("label",null,"Ticker (cotação auto)"),React.createElement("input",{value:f.ticker,onChange:e=>set('ticker',e.target.value),placeholder:"Ex.: ITSA4, VOO, BTC-USD"}))
+          ),
+          React.createElement("div",{className:"row2"},
+            React.createElement("div",{className:"field"},React.createElement("label",null,"Operação"),React.createElement("select",{value:f.catInv,onChange:e=>set('catInv',e.target.value)},CATS_INV.map(c=>React.createElement("option",{key:c},c)))),
+            React.createElement("div",{className:"field"},React.createElement("label",null,"Classe"),React.createElement("select",{value:f.classe,onChange:e=>set('classe',e.target.value)},CLASSES_INV.map(c=>React.createElement("option",{key:c},c))))
+          ),
+          React.createElement("div",{className:"row2"},
+            React.createElement("div",{className:"field"},React.createElement("label",null,"Qtd. cotas / unidades"),React.createElement("input",{value:f.cotas,onChange:e=>set('cotas',e.target.value),placeholder:"Ex.: 100"})),
+            React.createElement("div",{className:"field"},React.createElement("label",null,"Descrição (opcional)"),React.createElement("input",{value:f.descricao,onChange:e=>set('descricao',e.target.value),placeholder:"Ex.: Aporte mensal"}))
+          )
+        ),
+        !isInv && React.createElement("div",{className:"field"},React.createElement("label",null,"Descrição"),React.createElement("input",{value:f.descricao,onChange:e=>set('descricao',e.target.value),placeholder:"Ex.: Mercado do mês"})),
+        React.createElement("div",{className:"row2"},
+          contasDisp.length>0 && React.createElement("div",{className:"field"},React.createElement("label",null,"Conta"),React.createElement("select",{value:f.conta,onChange:e=>set('conta',e.target.value)},
+            React.createElement("option",{value:""},"Sem conta"),
+            contasDisp.map(c=>React.createElement("option",{key:c.id,value:c.nome},c.nome+" ("+c.banco+")"))
+          )),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Forma de pagamento"),React.createElement("select",{value:f.forma,onChange:e=>set('forma',e.target.value)},FORMAS.map(x=>React.createElement("option",{key:x},x))))
+        ),
+        React.createElement("div",{className:"field"},React.createElement("label",null,"Valor (R$)"),React.createElement("input",{value:f.valor,onChange:e=>set('valor',e.target.value),placeholder:"0,00",onKeyDown:e=>e.key==='Enter'&&salvar()})),
+        isInv && React.createElement("div",{style:{background:'#E8F5E9',border:'1px solid #A5D6A7',borderRadius:10,padding:'10px 14px',fontSize:12,color:'#2E7D32',marginBottom:12,lineHeight:1.6}},
+          "💡 Ao salvar, este lançamento entra na carteira: se o ativo já existe (mesmo ticker ou nome), as cotas e o valor são somados e o preço médio é recalculado automaticamente. Se não existe, um novo ativo é criado. Resgate/Venda reduz a posição."
+        ),
+        React.createElement("button",{className:"btn btn-primary btn-block",onClick:salvar,style:{marginTop:6}},modoEdicao?"Salvar alterações":"Salvar lançamento")
+      )
+    )
+  );
+}
+
+/* ============================================================
+   CONTAS CORRENTES — multi-banco
+   ============================================================ */
+function ContasCorrente({ctx}) {
+  const {data,setData,setToast,lancPer,lancAno} = ctx;
+  const contas = data.contas||[];
+  const [open,setOpen] = useState(false);
+  const [editConta,setEditConta] = useState(null);
+
+  function addConta(c) {setData(d=>({...d,contas:[...(d.contas||[]),{...c,id:uid()}]}));setToast('Conta adicionada');}
+  function salvarConta(c) {setData(d=>({...d,contas:(d.contas||[]).map(x=>x.id===c.id?c:x)}));setToast('Conta atualizada');}
+  function removerConta(id) {setData(d=>({...d,contas:(d.contas||[]).filter(x=>x.id!==id)}));setToast('Conta removida');}
+
+  // Saldo calculado por conta: saldo inicial + receitas + resgates − despesas − investimentos aplicados
+  // (usa TODOS os lançamentos da conta, pois saldo é acumulado; ignora lançamentos sem conta)
+  function saldoCalc(c){
+    if(!c) return 0;
+    const ini = Number(c.saldoInicial!==undefined ? c.saldoInicial : (c.saldo||0)) || 0;
+    const lcs = (data.lancamentos||[]).filter(l=>l && l.conta===c.nome);
+    let s = ini;
+    for(const l of lcs){
+      const v = Number(l.valor) || 0;
+      if(l.tipo==='Receita') s += v;
+      else if(l.tipo==='Despesa') s -= v;
+      else if(l.tipo==='Investimento'){
+        if(/resgate|venda/i.test(l.categoria||'')) s += v; else s -= v;
+      }
+    }
+    return Number.isFinite(s) ? s : ini;
+  }
+  // Estatísticas do ano selecionado (para os mini-indicadores do card)
+  function statsForConta(nome) {
+    const lcs = lancAno.filter(l=>l.conta===nome);
+    const entradas = lcs.filter(l=>l.tipo==='Receita').reduce((s,l)=>s+l.valor,0);
+    const saidas = lcs.filter(l=>l.tipo==='Despesa').reduce((s,l)=>s+l.valor,0);
+    const investido = lcs.filter(l=>l.tipo==='Investimento'&&!/resgate|venda/i.test(l.categoria||'')).reduce((s,l)=>s+l.valor,0);
+    return {entradas,saidas,investido,mov:lcs.length};
+  }
+
+  const totalSaldo = contas.reduce((s,c)=>s+saldoCalc(c),0);
+
+  return React.createElement(React.Fragment,null,
+    React.createElement(Header,{eyebrow:"Contas bancárias · multi-banco",title:"Contas Correntes",
+      right:React.createElement("button",{className:"btn btn-primary",onClick:()=>setOpen(true)},React.createElement(Ic.plus,{width:"16",height:"16"}),"Nova conta")
+    }),
+    React.createElement("div",{className:"kpis",style:{gridTemplateColumns:'repeat(4,1fr)'}},
+      React.createElement(Kpi,{lab:"Total em contas",val:fmtBRL(totalSaldo),cap:`${contas.length} conta(s) cadastrada(s)`,color:"var(--navy)"}),
+      React.createElement(Kpi,{lab:"Entradas no ano",val:fmtBRL(lancAno.filter(l=>l.tipo==='Receita').reduce((s,l)=>s+l.valor,0)),cap:"receitas registradas",color:"var(--pos)"}),
+      React.createElement(Kpi,{lab:"Saídas no ano",val:fmtBRL(lancAno.filter(l=>l.tipo==='Despesa').reduce((s,l)=>s+l.valor,0)),cap:"apenas despesas",color:"var(--neg)"}),
+      React.createElement(Kpi,{lab:"Investido no ano",val:fmtBRL(lancAno.filter(l=>l.tipo==='Investimento').reduce((s,l)=>s+l.valor,0)),cap:"aplicado na carteira",color:"var(--teal)"})
+    ),
+    React.createElement("div",{style:{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(300px,1fr))',gap:16,marginBottom:20}},
+      contas.length ? contas.map(c=>{
+        const st=statsForConta(c.nome);
+        const sc=saldoCalc(c);
+        return React.createElement("div",{key:c.id,className:"card",style:{padding:0,overflow:'hidden',border:'1px solid var(--line)',borderRadius:14,transition:'.2s',cursor:'pointer'},onClick:()=>setEditConta(c)},
+          React.createElement("div",{style:{height:6,background:c.cor||'var(--teal)',borderRadius:'14px 14px 0 0'}}),
+          React.createElement("div",{style:{padding:'18px 20px'}},
+            React.createElement("div",{style:{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:10}},
+              React.createElement("div",null,
+                React.createElement("div",{style:{fontWeight:700,fontSize:15,color:'var(--navy)'}},c.nome),
+                React.createElement("div",{style:{fontSize:12,color:'var(--muted)',marginTop:2}},c.banco," · ",c.tipo)
+              ),
+              React.createElement("button",{onClick:e=>{e.stopPropagation();removerConta(c.id);},style:{color:'var(--muted)',fontSize:18,lineHeight:1,padding:'0 4px'}},"×")
+            ),
+            React.createElement("div",{style:{fontFamily:'var(--font-display)',fontSize:26,fontWeight:600,color:sc>=0?'var(--navy)':'var(--neg)',marginBottom:2}},fmtBRL(sc)),
+            React.createElement("div",{style:{fontSize:11,color:'var(--muted)',marginBottom:12}},"saldo atual · inicial ",fmtBRL(c.saldoInicial!==undefined?c.saldoInicial:(c.saldo||0),0)),
+            React.createElement("div",{style:{display:'grid',gridTemplateColumns:'1fr 1fr 1fr 1fr',gap:8,borderTop:'1px solid var(--line)',paddingTop:12}},
+              React.createElement("div",null,React.createElement("div",{style:{fontSize:10,color:'var(--muted)',fontWeight:700,textTransform:'uppercase'}},"+Entradas"),React.createElement("div",{style:{fontSize:13,fontWeight:600,color:'var(--pos)'}},fmtBRL(st.entradas,0))),
+              React.createElement("div",null,React.createElement("div",{style:{fontSize:10,color:'var(--muted)',fontWeight:700,textTransform:'uppercase'}},"-Saídas"),React.createElement("div",{style:{fontSize:13,fontWeight:600,color:'var(--neg)'}},fmtBRL(st.saidas,0))),
+              React.createElement("div",null,React.createElement("div",{style:{fontSize:10,color:'var(--muted)',fontWeight:700,textTransform:'uppercase'}},"Investido"),React.createElement("div",{style:{fontSize:13,fontWeight:600,color:'var(--teal)'}},fmtBRL(st.investido,0))),
+              React.createElement("div",null,React.createElement("div",{style:{fontSize:10,color:'var(--muted)',fontWeight:700,textTransform:'uppercase'}},"Movim."),React.createElement("div",{style:{fontSize:13,fontWeight:600,color:'var(--muted)'}},st.mov," lanç."))
+            )
+          )
+        );
+      }) : React.createElement("div",{className:"card",style:{padding:48,textAlign:'center',color:'var(--muted)',gridColumn:'1/-1'}},
+        React.createElement("div",{style:{fontSize:36,marginBottom:12}},"🏦"),
+        React.createElement("div",{style:{fontWeight:600,marginBottom:6}},"Nenhuma conta cadastrada"),
+        React.createElement("div",{style:{fontSize:13}},"Adicione suas contas bancárias para ter um controle mais completo")
+      )
+    ),
+    React.createElement("div",{style:{fontSize:12,color:'var(--muted)',padding:'0 4px 16px'}},
+      "💡 Clique em uma conta para editar. O saldo é calculado automaticamente: saldo inicial + receitas + resgates de investimento − despesas − investimentos aplicados, somando os lançamentos vinculados a esta conta. Lançamentos sem conta não entram no saldo."
+    ),
+    open && React.createElement(ContaModal,{onClose:()=>setOpen(false),onSave:c=>{addConta(c);setOpen(false);}}),
+    editConta && React.createElement(ContaModal,{onClose:()=>setEditConta(null),onSave:c=>{salvarConta(c);setEditConta(null);},conta:editConta,modoEdicao:true})
+  );
+}
+
+const BANCOS_BR = ["Nubank","Itaú","Bradesco","Santander","Banco do Brasil","Caixa Econômica","BTG Pactual","XP Investimentos","Inter","C6 Bank","Sicoob","Sicredi","Neon","PicPay","Mercado Pago","Outro"];
+const TIPOS_CONTA = ["Corrente","Poupança","Salário","Investimento","Carteira Digital"];
+const CORES_CONTA = ["#5E7C76","#6F7B8A","#2A3340","#9C8466","#A8625C","#4F7A63","#6E8294","#8A7CA0","#B08D57","#5E8C84"];
+
+function ContaModal({onClose,onSave,conta,modoEdicao}) {
+  const [f,setF] = useState({nome:conta?.nome||'',banco:conta?.banco||BANCOS_BR[0],tipo:conta?.tipo||'Corrente',saldoInicial:(conta?.saldoInicial!==undefined?conta.saldoInicial:(conta?.saldo??0)),cor:conta?.cor||CORES_CONTA[0],...(modoEdicao&&conta?{id:conta.id}:{})});
+  function salvar(){if(!f.nome.trim())return;onSave({...f,saldoInicial:parseFloat(String(f.saldoInicial).replace(',','.'))||0});}
+  return React.createElement("div",{className:"modal-bg",onClick:onClose},
+    React.createElement("div",{className:"modal",style:{maxWidth:480},onClick:e=>e.stopPropagation()},
+      React.createElement("div",{className:"modal-h"},React.createElement("h3",{style:{color:'var(--navy)'}},modoEdicao?"Editar conta":"Nova conta"),React.createElement("button",{onClick:onClose,style:{fontSize:22,color:'var(--muted)'}},"×")),
+      React.createElement("div",{className:"modal-b"},
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Nome da conta"),React.createElement("input",{value:f.nome,onChange:e=>setF({...f,nome:e.target.value}),placeholder:"Ex.: Conta Nubank"})),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Banco / Instituição"),React.createElement("select",{value:f.banco,onChange:e=>setF({...f,banco:e.target.value})},BANCOS_BR.map(b=>React.createElement("option",{key:b},b))))
+        ),
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Tipo"),React.createElement("select",{value:f.tipo,onChange:e=>setF({...f,tipo:e.target.value})},TIPOS_CONTA.map(t=>React.createElement("option",{key:t},t)))),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Saldo inicial (R$)"),React.createElement("input",{value:f.saldoInicial,onChange:e=>setF({...f,saldoInicial:e.target.value}),placeholder:"0,00"}))
+        ),
+        React.createElement("div",{className:"field"},
+          React.createElement("label",null,"Cor de identificação"),
+          React.createElement("div",{style:{display:'flex',gap:8,flexWrap:'wrap'}},
+            CORES_CONTA.map(cor=>React.createElement("div",{key:cor,onClick:()=>setF({...f,cor}),style:{width:28,height:28,borderRadius:'50%',background:cor,cursor:'pointer',border:f.cor===cor?'3px solid var(--navy)':'3px solid transparent',transition:'.15s',transform:f.cor===cor?'scale(1.2)':'scale(1)'}}))
+          )
+        ),
+        React.createElement("div",{style:{display:'flex',gap:10,marginTop:4}},
+          modoEdicao&&React.createElement("button",{className:"btn btn-ghost",style:{flex:1},onClick:onClose},"Cancelar"),
+          React.createElement("button",{className:"btn btn-primary",style:{flex:modoEdicao?1:undefined,width:modoEdicao?undefined:'100%'},onClick:salvar},modoEdicao?"Salvar alterações":"Adicionar conta")
+        )
+      )
+    )
+  );
+}
+
+/* ============================================================
+   DRE
+   ============================================================ */
+function DRE({ctx}) {
+  const {lancPer,gruposDes} = ctx;
+  const recBruta = sum(lancPer.filter(l=>l.tipo==='Receita'),l=>l.valor);
+  const deducoes = sum(lancPer.filter(l=>l.tipo==='Despesa'&&l.grupo==='Tributos'),l=>l.valor);
+  const recLiq = recBruta - deducoes;
+  const porGrupo = {};
+  (gruposDes||DEFAULT_GRUPOS_DES).filter(g=>g!=='Tributos').forEach(g=>porGrupo[g]=sum(lancPer.filter(l=>l.tipo==='Despesa'&&l.grupo===g),l=>l.valor));
+  const totalCD = Object.values(porGrupo).reduce((a,b)=>a+b,0);
+  const ebit = recLiq - totalCD;
+  const finRec = sum(lancPer.filter(l=>l.tipo==='Receita'&&l.grupo==='Investimentos'),l=>l.valor);
+  const liquido = ebit + finRec;
+  const av = v => recLiq>0?React.createElement("span",{style:{color:'var(--muted)',fontSize:12}},fmtPct(v/recLiq)):null;
+  return React.createElement(React.Fragment,null,
+    React.createElement(Header,{eyebrow:"Demonstração do resultado · gerencial",title:"DRE",ctx}),
+    React.createElement("div",{className:"card panel"},
+      React.createElement("div",{className:"sec-h"},"Demonstração do resultado — período"),
+      React.createElement("div",{className:"dre-line sub"},React.createElement("span",null,"RECEITA OPERACIONAL BRUTA"),React.createElement("b",{className:"num"},fmtBRL(recBruta))),
+      React.createElement("div",{className:"dre-line ind"},React.createElement("span",null,"(−) Deduções e tributos"),React.createElement("span",{className:"num"},fmtBRL(-deducoes))),
+      React.createElement("div",{className:"dre-line sub"},React.createElement("span",null,"(=) RECEITA OPERACIONAL LÍQUIDA"),React.createElement("b",{className:"num"},fmtBRL(recLiq))),
+      Object.entries(porGrupo).map(([g,v])=>React.createElement("div",{className:"dre-line ind",key:g},React.createElement("span",null,"(−) ",g),React.createElement("span",{className:"num"},fmtBRL(-v)," ",av(v)))),
+      React.createElement("div",{className:"dre-line sub"},React.createElement("span",null,"(=) TOTAL DE CUSTOS E DESPESAS"),React.createElement("b",{className:"num",style:{color:'var(--neg)'}},fmtBRL(-totalCD))),
+      React.createElement("div",{className:"dre-line sub"},React.createElement("span",null,"(=) RESULTADO OPERACIONAL"),React.createElement("b",{className:"num"},fmtBRL(ebit))),
+      React.createElement("div",{className:"dre-line ind"},React.createElement("span",null,"(+) Resultado financeiro"),React.createElement("span",{className:"num"},fmtBRL(finRec))),
+      React.createElement("div",{className:"dre-line sub",style:{borderTop:'2px solid var(--gold)'}},React.createElement("span",null,"(=) RESULTADO LÍQUIDO DO PERÍODO"),React.createElement("b",{className:"num",style:{color:liquido>=0?'var(--pos)':'var(--neg)'}},fmtBRL(liquido)))
+    ),
+    React.createElement("div",{className:"kpis"},
+      React.createElement(Kpi,{lab:"Margem líquida",val:recLiq>0?fmtPct(liquido/recLiq):'—',cap:"resultado ÷ receita líquida",color:"var(--pos)"}),
+      React.createElement(Kpi,{lab:"Margem operacional",val:recLiq>0?fmtPct(ebit/recLiq):'—',cap:"EBIT ÷ receita líquida",color:"var(--navy)"}),
+      React.createElement(Kpi,{lab:"Peso dos custos",val:recLiq>0?fmtPct(totalCD/recLiq):'—',cap:"custos ÷ receita líquida",color:"var(--neg)"}),
+      React.createElement(Kpi,{lab:"Carga tributária",val:recBruta>0?fmtPct(deducoes/recBruta):'—',cap:"tributos ÷ receita bruta",color:"var(--teal)"})
+    )
+  );
+}
+
+/* ============================================================
+   INVESTIMENTOS — Carteira editável + atualização de mercado
+   ============================================================ */
+function Investimentos({ctx}) {
+  const {data,setData,setToast,invAtual,invAplic} = ctx;
+  const [open,setOpen] = useState(false);
+  const [editId,setEditId] = useState(null);
+  const [atualizando,setAtualizando] = useState(false);
+  const [ultimaAtualizacao,setUltimaAtualizacao] = useState(null);
+  const result = invAplic>0?(invAtual-invAplic)/invAplic:0;
+  const porClasse = {};
+  data.investimentos.forEach(i=>porClasse[i.classe]=(porClasse[i.classe]||0)+i.atual);
+  const classes = Object.entries(porClasse).sort((a,b)=>b[1]-a[1]);
+  const a = data.alavancagem;
+  const alvo = (a.retirada>0 && a.rendaDesejada>0) ? a.rendaDesejada*12/a.retirada : 0;
+  const rumo = alvo>0?invAtual/alvo:0;
+  const rendaPassiva = invAtual*a.retirada/12;
+  const anos = (()=>{const r=a.real/12,P=invAtual,PMT=a.aporteMensal,FV=alvo;if(PMT<=0||r<=0)return 0;const n=Math.log((FV*r+PMT)/(P*r+PMT))/Math.log(1+r);return n/12;})();
+
+  function add(inv){setData(d=>({...d,investimentos:[...d.investimentos,{...inv,id:uid()}]}));setToast('Ativo adicionado');}
+  function rm(id){setData(d=>({...d,investimentos:d.investimentos.filter(x=>x.id!==id)}));setToast('Ativo removido');}
+  function setAlav(k,v){setData(d=>({...d,alavancagem:{...d.alavancagem,[k]:v}}));}
+  function updateInv(id, fields){setData(d=>({...d,investimentos:d.investimentos.map(i=>i.id===id?{...i,...fields}:i)}));}
+
+  // Atualização de mercado via proxy CORS-friendly
+  async function atualizarMercado() {
+    const ativos = data.investimentos.filter(i=>i.ticker&&i.ticker.trim());
+    if(!ativos.length){setToast('Nenhum ticker cadastrado. Informe o ticker de cada ativo.');return;}
+    setAtualizando(true);
+    let atualizados=0;
+    const erros=[];
+
+    // Busca cotações: Brapi.dev para BR/cripto, Yahoo via proxy para internacionais
+    const resultados = await Promise.allSettled(
+      ativos.map(async (inv)=>{
+        const ticker = inv.ticker.trim().toUpperCase();
+        const classe = (inv.classe||'').toLowerCase();
+
+        // ── Classifica o ativo ──────────────────────────────────────────────
+        const isCripto = classe.includes('cripto') || ticker.endsWith('-USD') ||
+          /^(BTC|ETH|SOL|BNB|ADA|XRP|DOT|AVAX|MATIC|LINK|DOGE|LTC|USDT|USDC)$/.test(ticker);
+        const tickerLimpo = ticker.replace(/-USD$/i,'').replace(/\.SA$/i,'');
+        const isBR = !isCripto && (
+          ticker.endsWith('.SA') ||
+          /^[A-Z]{4}\d{1,2}F?$/.test(tickerLimpo) ||
+          /^[A-Z]{4}\d{2}$/.test(tickerLimpo)   // BDRs como AAPL34
+        );
+
+        // ── Estratégia 1: Brapi.dev (BR + cripto, sem CORS, API pública) ────
+        // Documentação: https://brapi.dev/
+        if(isBR || isCripto) {
+          const brapiTicker = isCripto
+            ? tickerLimpo+'-USD'        // BTC, ETH → BTC-USD
+            : tickerLimpo;              // ITSA4, MXRF11, BOVA11
+          try {
+            const res = await fetch(
+              `https://brapi.dev/api/quote/${encodeURIComponent(brapiTicker)}?token=anonymous`,
+              {cache:'no-store', signal:AbortSignal.timeout(10000)}
+            );
+            if(res.ok) {
+              const data = await res.json();
+              const q = data?.results?.[0];
+              if(q && q.regularMarketPrice) {
+                return {id:inv.id, preco:q.regularMarketPrice, symbol:brapiTicker, cotas:inv.cotas||1};
+              }
+            }
+          } catch(e){/* fallback para Yahoo */}
+        }
+
+        // ── Estratégia 2: Yahoo Finance via proxies CORS ─────────────────────
+        let symbol;
+        if(ticker.includes('.') || ticker.includes('-')) {
+          symbol = ticker;
+        } else if(isCripto) {
+          symbol = tickerLimpo + '-USD';
+        } else if(isBR) {
+          symbol = tickerLimpo + '.SA';
+        } else {
+          symbol = ticker; // VOO, SPY, QQQ, MSFT...
+        }
+
+        const yahooUrl = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`;
+        const proxies = [
+          `https://api.allorigins.win/get?url=${encodeURIComponent(yahooUrl)}`,
+          `https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`,
+          `https://thingproxy.freeboard.io/fetch/${yahooUrl}`,
+        ];
+        let json = null;
+        let lastErr = null;
+        for(const proxy of proxies) {
+          try {
+            const res = await fetch(proxy, {cache:'no-store', signal:AbortSignal.timeout(9000)});
+            if(!res.ok){lastErr=new Error('HTTP '+res.status);continue;}
+            const raw = await res.json();
+            // allorigins envolve em {contents:'...'}, outros retornam direto
+            json = raw.contents ? JSON.parse(raw.contents) : raw;
+            if(json?.chart?.result?.[0]?.meta?.regularMarketPrice) break;
+            json = null;
+          } catch(e){lastErr=e;json=null;}
+        }
+        if(!json) throw lastErr||new Error('proxy falhou: '+symbol);
+        const meta = json.chart.result[0].meta;
+        return {id:inv.id, preco:meta.regularMarketPrice, symbol, cotas:inv.cotas||1};
+      })
+    );
+
+    setData(d=>{
+      const invs = d.investimentos.map(inv=>{
+        const idx = ativos.findIndex(a=>a.id===inv.id);
+        const r = idx>=0 ? resultados[idx] : null;
+        if(!r||r.status!=='fulfilled') {
+          if(idx>=0) erros.push(inv.ticker||inv.ativo);
+          return inv;
+        }
+        const {preco,cotas,symbol} = r.value;
+        atualizados++;
+        return {...inv, atual: parseFloat((preco*(inv.cotas||1)).toFixed(2)), precoUnitario: preco, symbolResolvido: symbol};
+      });
+      return {...d, investimentos:invs};
+    });
+
+    setUltimaAtualizacao(new Date().toLocaleTimeString('pt-BR'));
+    if(atualizados>0 && erros.length===0)
+      setToast(`✓ ${atualizados} ativo(s) atualizado(s) com sucesso`);
+    else if(atualizados>0)
+      setToast(`${atualizados} ok. Falha: ${erros.join(', ')} — verifique o ticker`);
+    else
+      setToast('Falha ao buscar cotações. Verifique os tickers e sua conexão com a internet.');
+    setAtualizando(false);
+  }
+
+  const editando = editId ? data.investimentos.find(i=>i.id===editId) : null;
+
+  return React.createElement(React.Fragment,null,
+    React.createElement(Header,{eyebrow:"Carteira · posição e alavancagem",title:"Investimentos",right:
+      React.createElement("div",{className:"controls"},
+        React.createElement("button",{
+          className:"btn btn-ghost",
+          onClick:atualizarMercado,
+          disabled:atualizando,
+          style:{gap:6,fontSize:12}
+        },
+          atualizando
+            ? React.createElement("div",{style:{width:14,height:14,border:'2px solid var(--teal)',borderTopColor:'transparent',borderRadius:'50%',animation:'spin .6s linear infinite'}})
+            : React.createElement(Ic.cloud,{width:15,height:15}),
+          atualizando?'Atualizando...':'Atualizar cotações'
+        ),
+        ultimaAtualizacao && React.createElement("span",{style:{fontSize:11,color:'var(--muted)'}},`Última: ${ultimaAtualizacao}`),
+        React.createElement("button",{className:"btn btn-primary",onClick:()=>setOpen(true)},React.createElement(Ic.plus,{width:"16",height:"16"}),"Novo ativo")
+      )
+    }),
+    React.createElement("div",{className:"kpis"},
+      React.createElement(Kpi,{lab:"Patrimônio atual",val:fmtBRL(invAtual),cap:"valor de mercado",color:"var(--navy)"}),
+      React.createElement(Kpi,{lab:"Total aplicado",val:fmtBRL(invAplic),cap:"capital investido",color:"var(--teal)"}),
+      React.createElement(Kpi,{lab:"Resultado",val:fmtPct(result),cap:"ganho sobre o aplicado",color:result>=0?'var(--pos)':'var(--neg)'}),
+      React.createElement(Kpi,{lab:"Renda passiva (mês)",val:fmtBRL(rendaPassiva),cap:"regra "+fmtPct(a.retirada),color:"var(--gold)"})
+    ),
+    React.createElement("div",{className:"grid2"},
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},
+          "Carteira",
+          React.createElement("span",{style:{fontSize:10,fontWeight:500,opacity:.7}}," · clique em um ativo para editar")
+        ),
+        React.createElement("div",{style:{overflowX:'auto'}},
+          React.createElement("table",null,
+            React.createElement("thead",null,React.createElement("tr",null,
+              React.createElement("th",null,"Ativo"),
+              React.createElement("th",null,"Ticker"),
+              React.createElement("th",null,"Classe"),
+              React.createElement("th",{className:"r"},"Cotas"),
+              React.createElement("th",{className:"r"},"Pr.Médio"),
+              React.createElement("th",{className:"r"},"Aplicado"),
+              React.createElement("th",{className:"r"},"Atual"),
+              React.createElement("th",{className:"r"},"Result."),
+              React.createElement("th",null)
+            )),
+            React.createElement("tbody",null,data.investimentos.map(i=>{
+              const r=i.aplicado>0?(i.atual-i.aplicado)/i.aplicado:0;
+              const pm = (i.cotas>0)? (i.aplicado/i.cotas) : (i.precoMedio||i.precoUnitario||0);
+              const pu = pm>0 ? fmtBRL(pm,2) : '—';
+              return React.createElement("tr",{key:i.id,style:{cursor:'pointer'},onClick:()=>setEditId(i.id)},
+                React.createElement("td",null,
+                  React.createElement("div",{style:{fontWeight:600}},i.ativo),
+                ),
+                React.createElement("td",{style:{color:'var(--teal)',fontFamily:'monospace',fontSize:12}},i.ticker||'—'),
+                React.createElement("td",{style:{color:'var(--muted)'}},i.classe),
+                React.createElement("td",{className:"r num"},i.cotas!==undefined?i.cotas:'—'),
+                React.createElement("td",{className:"r num",style:{fontSize:12,color:'var(--muted)'}},pu),
+                React.createElement("td",{className:"r num"},fmtBRL(i.aplicado)),
+                React.createElement("td",{className:"r num",style:{fontWeight:600}},fmtBRL(i.atual)),
+                React.createElement("td",{className:"r num",style:{color:r>=0?'var(--pos)':'var(--neg)',fontWeight:700}},fmtPct(r)),
+                React.createElement("td",{className:"r"},React.createElement("button",{
+                  onClick:e=>{e.stopPropagation();rm(i.id);},
+                  style:{color:'var(--muted)',fontSize:18,lineHeight:1}
+                },"×"))
+              );
+            }))
+          )
+        )
+      ),
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},"Alocação por classe"),
+        React.createElement("table",null,React.createElement("tbody",null,classes.map(([c,v])=>React.createElement("tr",{key:c},
+          React.createElement("td",null,c),
+          React.createElement("td",{className:"r num",style:{width:100}},fmtBRL(v)),
+          React.createElement("td",{className:"r num",style:{width:60,color:'var(--muted)'}},fmtPct(v/invAtual)),
+          React.createElement("td",{style:{width:110}},React.createElement("div",{className:"bar"},React.createElement("i",{style:{width:v/invAtual*100+'%',background:'var(--teal)'}})))
+        ))))
+      )
+    ),
+    React.createElement("div",{className:"card panel"},
+      React.createElement("div",{className:"sec-h"},"Alavancagem de patrimônio · independência financeira"),
+      React.createElement("div",{style:{padding:16,display:'grid',gridTemplateColumns:'1fr 1fr',gap:18}},
+        React.createElement("div",null,
+          React.createElement("div",{style:{fontSize:12,fontWeight:700,color:'var(--muted)',textTransform:'uppercase',marginBottom:10}},"Premissas (edite)"),
+          [['aporteMensal','Aporte mensal (R$)',0],['real','Rentab. real anual (%)',1],['rendaDesejada','Renda desejada/mês (R$)',0],['retirada','Taxa de retirada (%)',1]].map(([k,lab,pct])=>
+            React.createElement("div",{key:k,style:{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8,gap:10}},
+              React.createElement("span",{style:{fontSize:13}},lab),
+              React.createElement("input",{style:{width:120,padding:'7px 10px',border:'1px solid var(--line)',borderRadius:8,textAlign:'right'},value:pct?a[k]*100:a[k],onChange:e=>{const n=parseFloat(e.target.value.replace(',','.'))||0;setAlav(k,pct?n/100:n);}})
+            )
+          )
+        ),
+        React.createElement("div",{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}},
+          React.createElement(MiniCard,{lab:"Patrimônio-alvo",val:fmtBRL(alvo),color:"var(--gold)"}),
+          React.createElement(MiniCard,{lab:"Rumo à independência",val:fmtPct(rumo),color:"var(--pos)"}),
+          React.createElement(MiniCard,{lab:"Renda passiva atual",val:fmtBRL(rendaPassiva),color:"var(--teal)"}),
+          React.createElement(MiniCard,{lab:"Anos até a independência",val:anos>0&&isFinite(anos)?anos.toFixed(1)+' anos':'—',color:"var(--navy)"})
+        )
+      )
+    ),
+    open && React.createElement(InvModal,{onClose:()=>setOpen(false),onSave:i=>{add(i);setOpen(false);}}),
+    editando && React.createElement(InvEditModal,{inv:editando,onClose:()=>setEditId(null),onSave:(id,f)=>{updateInv(id,f);setEditId(null);setToast('Ativo atualizado');}})
+  );
+}
+
+function InvEditModal({inv,onClose,onSave}) {
+  const [f,setF]=useState({
+    ativo:inv.ativo||'',
+    ticker:inv.ticker||'',
+    classe:inv.classe||CLASSES_INV[0],
+    cotas:inv.cotas!==undefined?inv.cotas:1,
+    aplicado:inv.aplicado||0,
+    atual:inv.atual||0,
+    aporte:inv.aporte||todayISO(),
+  });
+  function salvar(){
+    const ap=parseFloat(String(f.aplicado).replace(',','.'))||0;
+    const at=parseFloat(String(f.atual).replace(',','.'))||0;
+    const co=parseFloat(String(f.cotas).replace(',','.'))||0;
+    if(!f.ativo||ap<=0)return;
+    onSave(inv.id,{...f,aplicado:ap,atual:at||ap,cotas:co});
+  }
+  return React.createElement("div",{className:"modal-bg",onClick:onClose},
+    React.createElement("div",{className:"modal",style:{maxWidth:560},onClick:e=>e.stopPropagation()},
+      React.createElement("div",{className:"modal-h"},
+        React.createElement("h3",{style:{color:'var(--navy)'}},"Editar ativo"),
+        React.createElement("button",{onClick:onClose,style:{fontSize:22,color:'var(--muted)'}},"×")
+      ),
+      React.createElement("div",{className:"modal-b"},
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Nome do ativo"),React.createElement("input",{value:f.ativo,onChange:e=>setF({...f,ativo:e.target.value}),placeholder:"Ex.: ITSA4"})),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Ticker (para cotação auto)"),React.createElement("input",{value:f.ticker,onChange:e=>setF({...f,ticker:e.target.value}),placeholder:"Ex.: ITSA4, VOO, BTC-USD"}))
+        ),
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Classe"),React.createElement("select",{value:f.classe,onChange:e=>setF({...f,classe:e.target.value})},CLASSES_INV.map(c=>React.createElement("option",{key:c},c)))),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Data do aporte"),React.createElement("input",{type:"date",value:f.aporte,onChange:e=>setF({...f,aporte:e.target.value})}))
+        ),
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Qtd. cotas / unidades"),React.createElement("input",{value:f.cotas,onChange:e=>setF({...f,cotas:e.target.value}),placeholder:"Ex.: 100"})),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Valor aplicado (R$)"),React.createElement("input",{value:f.aplicado,onChange:e=>setF({...f,aplicado:e.target.value}),placeholder:"0,00"}))
+        ),
+        React.createElement("div",{className:"field"},React.createElement("label",null,"Valor atual (R$) — atualizado manualmente ou via cotação"),React.createElement("input",{value:f.atual,onChange:e=>setF({...f,atual:e.target.value}),placeholder:"0,00"})),
+        React.createElement("div",{style:{background:'var(--tint)',borderRadius:10,padding:'10px 14px',fontSize:12,color:'var(--muted)',marginBottom:16,lineHeight:1.7}},
+          React.createElement("b",null,"💡 Exemplos de ticker por tipo:"),React.createElement("br",null),
+          React.createElement("span",null,"• Ações BR / FIIs / ETFs BR: "),React.createElement("b",null,"ITSA4, MXRF11, BOVA11"),React.createElement("br",null),
+          React.createElement("span",null,"• BDRs: "),React.createElement("b",null,"AAPL34, MSFT34, GOGL34"),React.createElement("br",null),
+          React.createElement("span",null,"• ETFs / Ações EUA: "),React.createElement("b",null,"VOO, SPY, MSFT"),React.createElement("br",null),
+          React.createElement("span",null,"• Cripto: "),React.createElement("b",null,"BTC-USD, ETH-USD, SOL-USD"),React.createElement("br",null),
+          React.createElement("span",null,"• Ou use sufixo manual: "),React.createElement("b",null,"PETR4.SA, BTC-USD")
+        ),
+        React.createElement("div",{style:{display:'flex',gap:10}},
+          React.createElement("button",{className:"btn btn-ghost",style:{flex:1},onClick:onClose},"Cancelar"),
+          React.createElement("button",{className:"btn btn-primary",style:{flex:1},onClick:salvar},"Salvar alterações")
+        )
+      )
+    )
+  );
+}
+
+function MiniCard({lab,val,color}) {
+  return React.createElement("div",{style:{
+    border:'1.5px solid var(--line)',borderRadius:12,padding:'14px 16px',
+    background:'linear-gradient(135deg,#fff,var(--tint))',
+    transition:'.2s',cursor:'default',
+  }},
+    React.createElement("div",{style:{fontSize:10,fontWeight:700,textTransform:'uppercase',letterSpacing:'.07em',color:'var(--muted)'}}," ",lab),
+    React.createElement("div",{style:{fontFamily:'Fraunces,serif',fontSize:20,fontWeight:700,color,marginTop:8}}," ",val)
+  );
+}
+
+function InvModal({onClose,onSave}) {
+  const [f,setF]=useState({ativo:'',ticker:'',classe:CLASSES_INV[0],aporte:todayISO(),cotas:1,aplicado:'',atual:''});
+  function salvar(){const ap=parseFloat(String(f.aplicado).replace(',','.'))||0,at=parseFloat(String(f.atual).replace(',','.'))||0,co=parseFloat(String(f.cotas).replace(',','.'))||1;if(!f.ativo||ap<=0)return;onSave({...f,aplicado:ap,atual:at||ap,cotas:co});}
+  return React.createElement("div",{className:"modal-bg",onClick:onClose},
+    React.createElement("div",{className:"modal",onClick:e=>e.stopPropagation()},
+      React.createElement("div",{className:"modal-h"},React.createElement("h3",{style:{color:'var(--navy)'}},"Novo ativo"),React.createElement("button",{onClick:onClose,style:{fontSize:22,color:'var(--muted)'}},"×")),
+      React.createElement("div",{className:"modal-b"},
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Nome do ativo"),React.createElement("input",{value:f.ativo,onChange:e=>setF({...f,ativo:e.target.value}),placeholder:"Ex.: Tesouro Selic 2029"})),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Ticker (para cotação auto)"),React.createElement("input",{value:f.ticker,onChange:e=>setF({...f,ticker:e.target.value}),placeholder:"Ex.: ITSA4, VOO, BTC-USD"}))
+        ),
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Classe"),React.createElement("select",{value:f.classe,onChange:e=>setF({...f,classe:e.target.value})},CLASSES_INV.map(c=>React.createElement("option",{key:c},c)))),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Data do aporte"),React.createElement("input",{type:"date",value:f.aporte,onChange:e=>setF({...f,aporte:e.target.value})}))
+        ),
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Qtd. cotas / unidades"),React.createElement("input",{value:f.cotas,onChange:e=>setF({...f,cotas:e.target.value}),placeholder:"Ex.: 100"})),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Valor aplicado (R$)"),React.createElement("input",{value:f.aplicado,onChange:e=>setF({...f,aplicado:e.target.value}),placeholder:"0,00"}))
+        ),
+        React.createElement("div",{className:"field"},React.createElement("label",null,"Valor atual (R$)"),React.createElement("input",{value:f.atual,onChange:e=>setF({...f,atual:e.target.value}),placeholder:"0,00 (deixe em branco = igual ao aplicado)"})),
+        React.createElement("div",{style:{background:'var(--tint)',borderRadius:10,padding:'10px 14px',fontSize:12,color:'var(--muted)',marginBottom:16,lineHeight:1.7}},
+          React.createElement("b",null,"💡 Exemplos de ticker por tipo:"),React.createElement("br",null),
+          React.createElement("span",null,"• Ações BR / FIIs / ETFs BR: "),React.createElement("b",null,"ITSA4, MXRF11, BOVA11"),React.createElement("br",null),
+          React.createElement("span",null,"• BDRs: "),React.createElement("b",null,"AAPL34, MSFT34, GOGL34"),React.createElement("br",null),
+          React.createElement("span",null,"• ETFs / Ações EUA: "),React.createElement("b",null,"VOO, SPY, MSFT"),React.createElement("br",null),
+          React.createElement("span",null,"• Cripto: "),React.createElement("b",null,"BTC-USD, ETH-USD, SOL-USD")
+        ),
+        React.createElement("button",{className:"btn btn-primary btn-block",onClick:salvar},"Salvar ativo")
+      )
+    )
+  );
+}
+
+/* ============================================================
+   METAS
+   ============================================================ */
+function Metas({ctx}) {
+  const {data,setData,setToast} = ctx;
+  const [open,setOpen] = useState(false);
+  const [editMeta,setEditMeta] = useState(null);
+  function add(m){setData(d=>({...d,metas:[...d.metas,{...m,id:uid()}]}));setToast('Meta adicionada');}
+  function editar(m){setData(d=>({...d,metas:d.metas.map(x=>x.id===m.id?m:x)}));setToast('Meta atualizada');}
+  function rm(id){setData(d=>({...d,metas:d.metas.filter(x=>x.id!==id)}));setToast('Meta removida');}
+
+  // acumulado: se a meta tem vínculo, soma os lançamentos correspondentes; senão usa o valor manual
+  function acumuladoDe(m){
+    if(!m.vinculoTipo||m.vinculoTipo==='manual') return m.acumulado||0;
+    const desde = m.desde||'';
+    const ls = data.lancamentos.filter(l=>{
+      if(desde && l.data < desde) return false;
+      if(m.vinculoTipo==='grupo') return l.grupo===m.vinculoValor;
+      if(m.vinculoTipo==='categoria') return l.categoria===m.vinculoValor;
+      if(m.vinculoTipo==='conta') return l.conta===m.vinculoValor;
+      return false;
+    });
+    // para metas de acúmulo: receitas e investimentos somam; despesas do grupo também contam como "guardado"
+    return sum(ls, l=> l.valor);
+  }
+
+  return React.createElement(React.Fragment,null,
+    React.createElement(Header,{eyebrow:"Objetivos · acompanhamento",title:"Metas",right:React.createElement("button",{className:"btn btn-primary",onClick:()=>setOpen(true)},React.createElement(Ic.plus,{width:"16",height:"16"}),"Nova meta")}),
+    React.createElement("div",{className:"card panel"},
+      React.createElement("div",{className:"sec-h"},"Objetivos financeiros",React.createElement("span",{style:{fontSize:10,fontWeight:500,opacity:.7}}," · clique em uma meta para editar")),
+      React.createElement("div",{style:{overflowX:'auto'}},
+      React.createElement("table",null,
+        React.createElement("thead",null,React.createElement("tr",null,React.createElement("th",null,"Objetivo"),React.createElement("th",null,"Vínculo"),React.createElement("th",{className:"r"},"Alvo"),React.createElement("th",{className:"r"},"Acumulado"),React.createElement("th",null,"Progresso"),React.createElement("th",{className:"r"},"Falta"),React.createElement("th",{className:"r"},"Aporte/mês"),React.createElement("th",null))),
+        React.createElement("tbody",null,data.metas.map(m=>{
+          const acc=acumuladoDe(m);
+          const p=m.alvo>0?acc/m.alvo:0,falta=Math.max(m.alvo-acc,0),apm=m.prazo>0?falta/m.prazo:0;
+          const vinc = (!m.vinculoTipo||m.vinculoTipo==='manual')?'Manual':(m.vinculoValor||m.vinculoTipo);
+          return React.createElement("tr",{key:m.id,style:{cursor:'pointer'},onClick:()=>setEditMeta(m)},
+            React.createElement("td",null,m.objetivo),
+            React.createElement("td",null,React.createElement("span",{style:{fontSize:11,color:(!m.vinculoTipo||m.vinculoTipo==='manual')?'var(--muted)':'var(--teal)',fontWeight:600}},vinc)),
+            React.createElement("td",{className:"r num"},fmtBRL(m.alvo)),
+            React.createElement("td",{className:"r num"},fmtBRL(acc)),
+            React.createElement("td",{style:{minWidth:140}},React.createElement("div",{style:{display:'flex',alignItems:'center',gap:8}},React.createElement("div",{className:"bar",style:{flex:1}},React.createElement("i",{style:{width:Math.min(p*100,100)+'%',background:p>=1?'var(--gold)':'var(--pos)'}})),React.createElement("b",{style:{fontSize:12}},fmtPct(p)))),
+            React.createElement("td",{className:"r num"},fmtBRL(falta)),
+            React.createElement("td",{className:"r num",style:{fontWeight:600,color:'var(--teal)'}},fmtBRL(apm)),
+            React.createElement("td",{className:"r"},React.createElement("button",{onClick:e=>{e.stopPropagation();rm(m.id);},style:{color:'var(--muted)',fontSize:18}},"×"))
+          );
+        }))
+      ))
+    ),
+    React.createElement("p",{className:"note"},"Clique numa meta para editar. Metas com vínculo (grupo, categoria ou conta) atualizam o \"Acumulado\" automaticamente a partir dos lançamentos; metas manuais usam o valor que você digitar."),
+    open && React.createElement(MetaModal,{onClose:()=>setOpen(false),onSave:m=>{add(m);setOpen(false);},ctx}),
+    editMeta && React.createElement(MetaModal,{onClose:()=>setEditMeta(null),onSave:m=>{editar(m);setEditMeta(null);},ctx,meta:editMeta,modoEdicao:true})
+  );
+}
+
+function MetaModal({onClose,onSave,ctx,meta,modoEdicao}) {
+  const gruposDes=(ctx&&ctx.gruposDes)||DEFAULT_GRUPOS_DES;
+  const gruposRec=(ctx&&ctx.gruposRec)||DEFAULT_GRUPOS_REC;
+  const catsDes=(ctx&&ctx.catsDes)||DEFAULT_CATS_DES;
+  const catsRec=(ctx&&ctx.catsRec)||DEFAULT_CATS_REC;
+  const contas=(ctx&&ctx.contas)||[];
+  const todosGrupos=[...new Set([...gruposRec,...gruposDes])];
+  const todasCats=[...new Set([].concat(...Object.values(catsRec),...Object.values(catsDes)))];
+  const [f,setF]=useState({
+    objetivo:meta?.objetivo||'',
+    alvo:meta?.alvo||'',
+    acumulado:meta?.acumulado||'',
+    prazo:meta?.prazo||'',
+    vinculoTipo:meta?.vinculoTipo||'manual',
+    vinculoValor:meta?.vinculoValor||'',
+    desde:meta?.desde||'',
+    ...(modoEdicao&&meta?{id:meta.id}:{})
+  });
+  function set(k,v){setF(s=>{const n={...s,[k]:v};
+    if(k==='vinculoTipo'){
+      if(v==='grupo')n.vinculoValor=todosGrupos[0]||'';
+      else if(v==='categoria')n.vinculoValor=todasCats[0]||'';
+      else if(v==='conta')n.vinculoValor=(contas[0]&&contas[0].nome)||'';
+      else n.vinculoValor='';
+    }
+    return n;});}
+  function salvar(){
+    const alvo=parseFloat(String(f.alvo).replace(',','.'))||0;
+    if(!f.objetivo||alvo<=0)return;
+    onSave({...(modoEdicao&&f.id?{id:f.id}:{}),objetivo:f.objetivo,alvo,
+      acumulado:parseFloat(String(f.acumulado).replace(',','.'))||0,
+      prazo:parseInt(f.prazo)||12,
+      vinculoTipo:f.vinculoTipo,vinculoValor:f.vinculoValor,desde:f.desde});
+  }
+  const isManual=f.vinculoTipo==='manual';
+  const opcoes = f.vinculoTipo==='grupo'?todosGrupos : f.vinculoTipo==='categoria'?todasCats : f.vinculoTipo==='conta'?contas.map(c=>c.nome):[];
+  return React.createElement("div",{className:"modal-bg",onClick:onClose},
+    React.createElement("div",{className:"modal",onClick:e=>e.stopPropagation()},
+      React.createElement("div",{className:"modal-h"},React.createElement("h3",{style:{color:'var(--navy)'}},modoEdicao?"Editar meta":"Nova meta"),React.createElement("button",{onClick:onClose,style:{fontSize:22,color:'var(--muted)'}},"×")),
+      React.createElement("div",{className:"modal-b"},
+        React.createElement("div",{className:"field"},React.createElement("label",null,"Objetivo"),React.createElement("input",{value:f.objetivo,onChange:e=>set('objetivo',e.target.value),placeholder:"Ex.: Reserva de emergência"})),
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Valor-alvo (R$)"),React.createElement("input",{value:f.alvo,onChange:e=>set('alvo',e.target.value),placeholder:"0,00"})),
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Prazo (meses)"),React.createElement("input",{value:f.prazo,onChange:e=>set('prazo',e.target.value),placeholder:"12"}))
+        ),
+        React.createElement("div",{className:"row2"},
+          React.createElement("div",{className:"field"},React.createElement("label",null,"Atualizar acumulado por"),React.createElement("select",{value:f.vinculoTipo,onChange:e=>set('vinculoTipo',e.target.value)},
+            React.createElement("option",{value:"manual"},"Manual (eu informo)"),
+            React.createElement("option",{value:"grupo"},"Grupo de lançamentos"),
+            React.createElement("option",{value:"categoria"},"Categoria de lançamentos"),
+            React.createElement("option",{value:"conta"},"Conta")
+          )),
+          isManual
+            ? React.createElement("div",{className:"field"},React.createElement("label",null,"Já acumulado (R$)"),React.createElement("input",{value:f.acumulado,onChange:e=>set('acumulado',e.target.value),placeholder:"0,00"}))
+            : React.createElement("div",{className:"field"},React.createElement("label",null,"Vincular a"),React.createElement("select",{value:f.vinculoValor,onChange:e=>set('vinculoValor',e.target.value)},opcoes.map(o=>React.createElement("option",{key:o},o))))
+        ),
+        !isManual && React.createElement("div",{className:"field"},React.createElement("label",null,"Contar a partir de (opcional)"),React.createElement("input",{type:"date",value:f.desde,onChange:e=>set('desde',e.target.value)})),
+        !isManual && React.createElement("div",{style:{background:'var(--tint)',borderRadius:10,padding:'10px 14px',fontSize:12,color:'var(--muted)',marginBottom:14,lineHeight:1.6}},
+          "🔗 O acumulado desta meta será calculado somando os lançamentos do vínculo escolhido e se atualiza sozinho a cada novo lançamento."
+        ),
+        React.createElement("button",{className:"btn btn-primary btn-block",onClick:salvar},modoEdicao?"Salvar alterações":"Salvar meta")
+      )
+    )
+  );
+}
+
+/* ============================================================
+   PROJEÇÕES
+   ============================================================ */
+function Projecoes({ctx}) {
+  const {data,setData} = ctx;
+  const p = data.premissas;
+  function set(k,v){setData(d=>({...d,premissas:{...d.premissas,[k]:v}}));}
+  const linhas=[];let saldoAnt=p.inicial,investido=p.inicial;
+  for(let a=1;a<=p.horizonte;a++){
+    const aporteAno=p.aporte*12*Math.pow(1+p.reajuste,a-1);
+    const patr=saldoAnt*(1+p.real)+aporteAno*Math.pow(1+p.real,0.5);
+    investido+=aporteAno;
+    linhas.push({ano:a,idade:p.idade+a,investido,patr,ganho:patr-investido,mult:patr/investido});
+    saldoAnt=patr;
+  }
+  const fim=linhas[linhas.length-1]||{patr:0,investido:0,ganho:0};
+  const maxP=Math.max(...linhas.map(l=>l.patr),1);
+  const campos=[['inicial','Patrimônio inicial (R$)',0],['aporte','Aporte mensal (R$)',0],['reajuste','Reajuste anual do aporte (%)',1],['real','Rentabilidade real anual (%)',1],['inflacao','Inflação estimada (%)',1],['idade','Idade atual',2],['horizonte','Horizonte (anos)',2]];
+  return React.createElement(React.Fragment,null,
+    React.createElement(Header,{eyebrow:"Patrimônio de longo prazo · juros compostos",title:"Projeções",right:React.createElement("span",{className:"pill",style:{background:'var(--gold-lt)',color:'var(--gold)'}},"valores de hoje (rentab. real)")}),
+    React.createElement("div",{className:"grid2"},
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},"Premissas"),
+        React.createElement("div",{style:{padding:14}},campos.map(([k,lab,t])=>
+          React.createElement("div",{key:k,style:{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:9,gap:10}},
+            React.createElement("span",{style:{fontSize:13}},lab),
+            React.createElement("input",{style:{width:120,padding:'7px 10px',border:'1px solid var(--line)',borderRadius:8,textAlign:'right'},value:t===1?p[k]*100:p[k],onChange:e=>{const n=parseFloat(e.target.value.replace(',','.'))||0;set(k,t===1?n/100:t===2?Math.round(n):n);}})
+          )
+        ))
+      ),
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},"Resultados-chave"),
+        React.createElement("div",{style:{padding:16,display:'grid',gap:12}},
+          React.createElement(MiniCard,{lab:"Patrimônio projetado",val:fmtBRL(fim.patr),color:"var(--pos)"}),
+          React.createElement(MiniCard,{lab:"Total investido",val:fmtBRL(fim.investido),color:"var(--navy)"}),
+          React.createElement(MiniCard,{lab:"Ganho com juros",val:fmtBRL(fim.ganho),color:"var(--gold)"}),
+          React.createElement(MiniCard,{lab:"Renda passiva estimada (4%/mês)",val:fmtBRL(fim.patr*0.04/12),color:"var(--teal)"})
+        )
+      )
+    ),
+    React.createElement("div",{className:"card panel"},
+      React.createElement("div",{className:"sec-h"},"Evolução do patrimônio"),
+      React.createElement("div",{style:{padding:'14px 14px 6px'}},
+        React.createElement("div",{className:"barchart",style:{height:140}},
+          linhas.filter((_,i)=>i%Math.ceil(linhas.length/24||1)===0).map((l,i)=>React.createElement("div",{className:"col",key:i,title:`Ano ${l.ano}: ${fmtBRL(l.patr)}`},
+            React.createElement("div",{className:"bars"},React.createElement("span",{style:{height:l.patr/maxP*120+'px',background:'linear-gradient(var(--teal),var(--teal-lt))',width:'70%'}})),
+            React.createElement("div",{className:"mlab"},l.ano)
+          ))
+        )
+      )
+    ),
+    React.createElement("div",{className:"card panel"},
+      React.createElement("div",{className:"sec-h"},"Projeção ano a ano"),
+      React.createElement("div",{style:{maxHeight:320,overflow:'auto'}},
+        React.createElement("table",null,
+          React.createElement("thead",null,React.createElement("tr",null,React.createElement("th",null,"Ano"),React.createElement("th",null,"Idade"),React.createElement("th",{className:"r"},"Investido"),React.createElement("th",{className:"r"},"Patrimônio"),React.createElement("th",{className:"r"},"Ganho"),React.createElement("th",{className:"r"},"Múltiplo"))),
+          React.createElement("tbody",null,linhas.map(l=>React.createElement("tr",{key:l.ano},
+            React.createElement("td",{className:"num"},l.ano),React.createElement("td",{className:"num"},l.idade),React.createElement("td",{className:"r num"},fmtBRL(l.investido)),
+            React.createElement("td",{className:"r num",style:{fontWeight:600}},fmtBRL(l.patr)),React.createElement("td",{className:"r num",style:{color:'var(--gold)'}},fmtBRL(l.ganho)),React.createElement("td",{className:"r num"},l.mult.toFixed(2),"×")
+          )))
+        )
+      )
+    )
+  );
+}
+
+/* ============================================================
+   GRUPOS & CATEGORIAS — gerenciamento por usuário
+   Dados salvos em gruposCat do payload do usuário (RLS garante isolamento)
+   ============================================================ */
+function GruposCategorias({ctx}) {
+  const {data,setData,setToast} = ctx;
+  const gc = data.gruposCat || {
+    gruposRec:[...DEFAULT_GRUPOS_REC],
+    catsRec:JSON.parse(JSON.stringify(DEFAULT_CATS_REC)),
+    gruposDes:[...DEFAULT_GRUPOS_DES],
+    catsDes:JSON.parse(JSON.stringify(DEFAULT_CATS_DES)),
+  };
+
+  const [tipoAtivo,setTipoAtivo] = useState('Despesa'); // Despesa | Receita
+  const [grupoSel,setGrupoSel] = useState(null);
+  const [modalGrupo,setModalGrupo] = useState(null); // null | {mode:'add'|'edit', nome:'', original:''}
+  const [modalCat,setModalCat] = useState(null);     // null | {mode:'add'|'edit', nome:'', original:'', grupo:''}
+  const [confirmExc,setConfirmExc] = useState(null); // null | {tipo:'grupo'|'cat', nome:string, grupo?:string}
+
+  const grupos = tipoAtivo==='Receita' ? gc.gruposRec : gc.gruposDes;
+  const cats = (tipoAtivo==='Receita' ? gc.catsRec : gc.catsDes)[grupoSel]||[];
+
+  function saveGc(newGc) {
+    setData(d=>({...d,gruposCat:{...gc,...newGc}}));
+  }
+
+  // Grupos
+  function addGrupo(nome) {
+    if(!nome.trim()||grupos.includes(nome.trim())){setToast('Nome inválido ou já existe');return;}
+    const n = nome.trim();
+    if(tipoAtivo==='Receita'){
+      saveGc({gruposRec:[...gc.gruposRec,n],catsRec:{...gc.catsRec,[n]:[]}});
+    } else {
+      saveGc({gruposDes:[...gc.gruposDes,n],catsDes:{...gc.catsDes,[n]:[]}});
+    }
+    setToast('Grupo adicionado');
+    setModalGrupo(null);
+  }
+  function editGrupo(original, novo) {
+    if(!novo.trim()||grupos.filter(g=>g!==original).includes(novo.trim())){setToast('Nome inválido ou já existe');return;}
+    const n = novo.trim();
+    if(tipoAtivo==='Receita'){
+      const gr = gc.gruposRec.map(g=>g===original?n:g);
+      const cr = {...gc.catsRec};
+      if(original!==n){cr[n]=cr[original]||[];delete cr[original];}
+      saveGc({gruposRec:gr,catsRec:cr});
+    } else {
+      const gd = gc.gruposDes.map(g=>g===original?n:g);
+      const cd = {...gc.catsDes};
+      if(original!==n){cd[n]=cd[original]||[];delete cd[original];}
+      saveGc({gruposDes:gd,catsDes:cd});
+    }
+    if(grupoSel===original) setGrupoSel(n);
+    setToast('Grupo atualizado');
+    setModalGrupo(null);
+  }
+  function excluirGrupo(nome) {
+    if(tipoAtivo==='Receita'){
+      const gr = gc.gruposRec.filter(g=>g!==nome);
+      const cr = {...gc.catsRec};
+      delete cr[nome];
+      saveGc({gruposRec:gr,catsRec:cr});
+    } else {
+      const gd = gc.gruposDes.filter(g=>g!==nome);
+      const cd = {...gc.catsDes};
+      delete cd[nome];
+      saveGc({gruposDes:gd,catsDes:cd});
+    }
+    if(grupoSel===nome) setGrupoSel(null);
+    setToast('Grupo excluído');
+    setConfirmExc(null);
+  }
+
+  // Categorias
+  function addCat(grupo, nome) {
+    if(!nome.trim()||(cats.includes(nome.trim()))){setToast('Nome inválido ou já existe');return;}
+    const n = nome.trim();
+    if(tipoAtivo==='Receita'){
+      const cr = {...gc.catsRec,[grupo]:[...(gc.catsRec[grupo]||[]),n]};
+      saveGc({catsRec:cr});
+    } else {
+      const cd = {...gc.catsDes,[grupo]:[...(gc.catsDes[grupo]||[]),n]};
+      saveGc({catsDes:cd});
+    }
+    setToast('Categoria adicionada');
+    setModalCat(null);
+  }
+  function editCat(grupo, original, novo) {
+    const lista = (tipoAtivo==='Receita'?gc.catsRec:gc.catsDes)[grupo]||[];
+    if(!novo.trim()||lista.filter(c=>c!==original).includes(novo.trim())){setToast('Nome inválido ou já existe');return;}
+    const n = novo.trim();
+    if(tipoAtivo==='Receita'){
+      const cr = {...gc.catsRec,[grupo]:lista.map(c=>c===original?n:c)};
+      saveGc({catsRec:cr});
+    } else {
+      const cd = {...gc.catsDes,[grupo]:lista.map(c=>c===original?n:c)};
+      saveGc({catsDes:cd});
+    }
+    setToast('Categoria atualizada');
+    setModalCat(null);
+  }
+  function excluirCat(grupo, nome) {
+    if(tipoAtivo==='Receita'){
+      const cr = {...gc.catsRec,[grupo]:(gc.catsRec[grupo]||[]).filter(c=>c!==nome)};
+      saveGc({catsRec:cr});
+    } else {
+      const cd = {...gc.catsDes,[grupo]:(gc.catsDes[grupo]||[]).filter(c=>c!==nome)};
+      saveGc({catsDes:cd});
+    }
+    setToast('Categoria excluída');
+    setConfirmExc(null);
+  }
+
+  return React.createElement(React.Fragment,null,
+    React.createElement(Header,{eyebrow:"Personalização · por usuário",title:"Grupos & Categorias"}),
+    React.createElement("div",{style:{background:'rgba(26,107,110,.07)',border:'1px solid rgba(26,107,110,.2)',borderRadius:10,padding:'10px 16px',fontSize:13,color:'var(--teal)',marginBottom:16,lineHeight:1.6}},
+      "🔒 Seus grupos e categorias são ",React.createElement("b",null,"exclusivos da sua conta")," e não afetam outros usuários. As alterações são salvas automaticamente."
+    ),
+    // Tipo
+    React.createElement("div",{style:{display:'flex',gap:8,marginBottom:16}},
+      ['Despesa','Receita','Investimento'].map(t=>React.createElement("button",{key:t,className:"chip "+(tipoAtivo===t?'on':''),onClick:()=>{setTipoAtivo(t);setGrupoSel(null);}},t))
+    ),
+    // Seção exclusiva de Investimento (separada de Despesa/Receita)
+    tipoAtivo==='Investimento' && React.createElement("div",null,
+      React.createElement("div",{style:{background:'rgba(156,132,102,.08)',border:'1px solid rgba(156,132,102,.3)',borderRadius:10,padding:'12px 16px',fontSize:13,color:'var(--navy)',marginBottom:16,lineHeight:1.6}},
+        "📈 ",React.createElement("b",null,"Investimento é uma área à parte"),", não entra em despesas nem em receitas. Use o tipo ",React.createElement("b",null,"Investimento"),
+        " ao criar um lançamento: ele sai da conta e vai direto para a sua ",React.createElement("b",null,"Carteira"),
+        " (somando cotas e recalculando o preço médio). As operações disponíveis estão listadas abaixo."
+      ),
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},"Operações de Investimento"),
+        React.createElement("table",null,
+          React.createElement("thead",null,React.createElement("tr",null,
+            React.createElement("th",null,"Operação"),
+            React.createElement("th",null,"O que faz na carteira")
+          )),
+          React.createElement("tbody",null,
+            [["Compra de ativo","Cria o ativo (ou soma à posição) e define/atualiza o preço médio"],
+             ["Aporte / Reforço","Soma cotas e valor ao ativo existente, recalculando o preço médio"],
+             ["Resgate / Venda","Reduz cotas e valor aplicado proporcionalmente ao preço médio"],
+             ["Dividendos reinvestidos","Reforça a posição com proventos reinvestidos"],
+             ["Aplicação automática","Aporte recorrente (ex.: débito programado)"]].map(([op,desc])=>
+              React.createElement("tr",{key:op},
+                React.createElement("td",null,React.createElement("b",null,op)),
+                React.createElement("td",{style:{color:'var(--muted)',fontSize:13}},desc)
+              )
+            )
+          )
+        )
+      ),
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},"Classes de ativo"),
+        React.createElement("div",{style:{display:'flex',flexWrap:'wrap',gap:8,padding:14}},
+          CLASSES_INV.map(c=>React.createElement("span",{key:c,style:{background:'var(--tint)',border:'1px solid var(--line)',borderRadius:999,padding:'5px 12px',fontSize:13,fontWeight:600,color:'var(--navy)'}},c))
+        )
+      ),
+      React.createElement("p",{className:"note",style:{marginTop:8}},"Para gerir os ativos da sua carteira (preço médio, cotas, cotações), use a tela ",React.createElement("b",null,"Investimentos"),".")
+    ),
+    // Grupos/Categorias (apenas Despesa e Receita)
+    tipoAtivo!=='Investimento' &&
+      React.createElement("div",{className:"grid2"},
+      // Grupos
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},
+          "Grupos de ",tipoAtivo,
+          React.createElement("button",{
+            onClick:()=>setModalGrupo({mode:'add',nome:''}),
+            style:{background:'rgba(255,255,255,.15)',border:'none',color:'#fff',borderRadius:6,padding:'3px 10px',fontSize:12,cursor:'pointer',fontWeight:600}
+          },"+ Novo grupo")
+        ),
+        React.createElement("table",null,
+          React.createElement("thead",null,React.createElement("tr",null,
+            React.createElement("th",null,"Nome do grupo"),
+            React.createElement("th",{className:"r"},"Categorias"),
+            React.createElement("th",null,"Ações")
+          )),
+          React.createElement("tbody",null,
+            grupos.length
+              ? grupos.map(g=>React.createElement("tr",{key:g,
+                  style:{background:grupoSel===g?'rgba(26,107,110,.06)':'',cursor:'pointer'},
+                  onClick:()=>setGrupoSel(g===grupoSel?null:g)
+                },
+                  React.createElement("td",null,
+                    React.createElement("div",{style:{display:'flex',alignItems:'center',gap:8}},
+                      grupoSel===g && React.createElement("span",{style:{width:6,height:6,borderRadius:'50%',background:'var(--teal)',flexShrink:0}}),
+                      React.createElement("b",null,g)
+                    )
+                  ),
+                  React.createElement("td",{className:"r num"},((tipoAtivo==='Receita'?gc.catsRec:gc.catsDes)[g]||[]).length),
+                  React.createElement("td",null,
+                    React.createElement("div",{style:{display:'flex',gap:6}},
+                      React.createElement("button",{
+                        onClick:e=>{e.stopPropagation();setModalGrupo({mode:'edit',nome:g,original:g});},
+                        style:{fontSize:11,padding:'2px 8px',borderRadius:5,border:'1px solid var(--teal)',color:'var(--teal)',cursor:'pointer',background:'none'}
+                      },"Editar"),
+                      React.createElement("button",{
+                        onClick:e=>{e.stopPropagation();setConfirmExc({tipo:'grupo',nome:g});},
+                        style:{fontSize:11,padding:'2px 8px',borderRadius:5,border:'1px solid var(--neg)',color:'var(--neg)',cursor:'pointer',background:'none'}
+                      },"Excluir")
+                    )
+                  )
+                ))
+              : React.createElement("tr",null,React.createElement("td",{colSpan:3,className:"empty"},"Nenhum grupo cadastrado."))
+          )
+        )
+      ),
+      // Categorias do grupo selecionado
+      React.createElement("div",{className:"card panel"},
+        React.createElement("div",{className:"sec-h"},
+          grupoSel ? `Categorias de "${grupoSel}"` : "Selecione um grupo",
+          grupoSel && React.createElement("button",{
+            onClick:()=>setModalCat({mode:'add',nome:'',grupo:grupoSel}),
+            style:{background:'rgba(255,255,255,.15)',border:'none',color:'#fff',borderRadius:6,padding:'3px 10px',fontSize:12,cursor:'pointer',fontWeight:600}
+          },"+ Nova categoria")
+        ),
+        !grupoSel
+          ? React.createElement("div",{className:"empty"},"← Clique em um grupo para ver e editar suas categorias.")
+          : React.createElement("table",null,
+              React.createElement("thead",null,React.createElement("tr",null,
+                React.createElement("th",null,"Categoria"),
+                React.createElement("th",null,"Ações")
+              )),
+              React.createElement("tbody",null,
+                cats.length
+                  ? cats.map(c=>React.createElement("tr",{key:c},
+                      React.createElement("td",null,c),
+                      React.createElement("td",null,
+                        React.createElement("div",{style:{display:'flex',gap:6}},
+                          React.createElement("button",{
+                            onClick:()=>setModalCat({mode:'edit',nome:c,original:c,grupo:grupoSel}),
+                            style:{fontSize:11,padding:'2px 8px',borderRadius:5,border:'1px solid var(--teal)',color:'var(--teal)',cursor:'pointer',background:'none'}
+                          },"Editar"),
+                          React.createElement("button",{
+                            onClick:()=>setConfirmExc({tipo:'cat',nome:c,grupo:grupoSel}),
+                            style:{fontSize:11,padding:'2px 8px',borderRadius:5,border:'1px solid var(--neg)',color:'var(--neg)',cursor:'pointer',background:'none'}
+                          },"Excluir")
+                        )
+                      )
+                    ))
+                  : React.createElement("tr",null,React.createElement("td",{colSpan:2,className:"empty"},"Nenhuma categoria. Clique em \"+ Nova categoria\"."))
+              )
+            )
+      )
+    ),
+    // Modal Grupo
+    modalGrupo && React.createElement("div",{className:"modal-bg",onClick:()=>setModalGrupo(null)},
+      React.createElement("div",{className:"modal",style:{maxWidth:400},onClick:e=>e.stopPropagation()},
+        React.createElement("div",{className:"modal-h"},
+          React.createElement("h3",{style:{color:'var(--navy)'}},modalGrupo.mode==='add'?'Novo grupo':'Editar grupo'),
+          React.createElement("button",{onClick:()=>setModalGrupo(null),style:{fontSize:22,color:'var(--muted)'}},"×")
+        ),
+        React.createElement("div",{className:"modal-b"},
+          React.createElement("div",{className:"field"},
+            React.createElement("label",null,"Nome do grupo"),
+            React.createElement("input",{
+              value:modalGrupo.nome,
+              autoFocus:true,
+              onChange:e=>setModalGrupo({...modalGrupo,nome:e.target.value}),
+              placeholder:"Ex.: Saúde e Bem-estar",
+              onKeyDown:e=>e.key==='Enter'&&(modalGrupo.mode==='add'?addGrupo(modalGrupo.nome):editGrupo(modalGrupo.original,modalGrupo.nome))
+            })
+          ),
+          React.createElement("div",{style:{display:'flex',gap:10}},
+            React.createElement("button",{className:"btn btn-ghost",style:{flex:1},onClick:()=>setModalGrupo(null)},"Cancelar"),
+            React.createElement("button",{className:"btn btn-primary",style:{flex:1},onClick:()=>modalGrupo.mode==='add'?addGrupo(modalGrupo.nome):editGrupo(modalGrupo.original,modalGrupo.nome)},modalGrupo.mode==='add'?'Adicionar':'Salvar')
+          )
+        )
+      )
+    ),
+    // Modal Categoria
+    modalCat && React.createElement("div",{className:"modal-bg",onClick:()=>setModalCat(null)},
+      React.createElement("div",{className:"modal",style:{maxWidth:400},onClick:e=>e.stopPropagation()},
+        React.createElement("div",{className:"modal-h"},
+          React.createElement("h3",{style:{color:'var(--navy)'}},modalCat.mode==='add'?'Nova categoria':'Editar categoria'),
+          React.createElement("button",{onClick:()=>setModalCat(null),style:{fontSize:22,color:'var(--muted)'}},"×")
+        ),
+        React.createElement("div",{className:"modal-b"},
+          React.createElement("div",{style:{fontSize:12,color:'var(--muted)',marginBottom:12}},"Grupo: ",React.createElement("b",{style:{color:'var(--navy)'}},modalCat.grupo)),
+          React.createElement("div",{className:"field"},
+            React.createElement("label",null,"Nome da categoria"),
+            React.createElement("input",{
+              value:modalCat.nome,
+              autoFocus:true,
+              onChange:e=>setModalCat({...modalCat,nome:e.target.value}),
+              placeholder:"Ex.: Farmácia",
+              onKeyDown:e=>e.key==='Enter'&&(modalCat.mode==='add'?addCat(modalCat.grupo,modalCat.nome):editCat(modalCat.grupo,modalCat.original,modalCat.nome))
+            })
+          ),
+          React.createElement("div",{style:{display:'flex',gap:10}},
+            React.createElement("button",{className:"btn btn-ghost",style:{flex:1},onClick:()=>setModalCat(null)},"Cancelar"),
+            React.createElement("button",{className:"btn btn-primary",style:{flex:1},onClick:()=>modalCat.mode==='add'?addCat(modalCat.grupo,modalCat.nome):editCat(modalCat.grupo,modalCat.original,modalCat.nome)},modalCat.mode==='add'?'Adicionar':'Salvar')
+          )
+        )
+      )
+    ),
+    // Confirmação exclusão
+    confirmExc && React.createElement("div",{className:"modal-bg",onClick:()=>setConfirmExc(null)},
+      React.createElement("div",{className:"modal",style:{maxWidth:400},onClick:e=>e.stopPropagation()},
+        React.createElement("div",{className:"modal-h"},
+          React.createElement("h3",{style:{color:'var(--neg)'}},"Confirmar exclusão"),
+          React.createElement("button",{onClick:()=>setConfirmExc(null),style:{fontSize:22,color:'var(--muted)'}},"×")
+        ),
+        React.createElement("div",{className:"modal-b"},
+          React.createElement("p",{style:{fontSize:14,lineHeight:1.6,marginBottom:20}},
+            "Deseja excluir "+( confirmExc.tipo==='grupo'?"o grupo":"a categoria")+" ",
+            React.createElement("b",null,`"${confirmExc.nome}"`),
+            (confirmExc.tipo==='grupo'?" e todas as suas categorias?":"?")
+          ),
+          React.createElement("div",{style:{display:'flex',gap:10}},
+            React.createElement("button",{className:"btn btn-ghost",style:{flex:1},onClick:()=>setConfirmExc(null)},"Cancelar"),
+            React.createElement("button",{
+              className:"btn",style:{flex:1,background:'var(--neg)',color:'#fff'},
+              onClick:()=>confirmExc.tipo==='grupo'?excluirGrupo(confirmExc.nome):excluirCat(confirmExc.grupo,confirmExc.nome)
+            },"Excluir")
+          )
+        )
+      )
+    )
+  );
+}
+
+/* ============================================================
+   PAINEL ADMIN
+   Visível apenas para gabriel.vieira_lino@hotmail.com
+   ============================================================ */
+function Admin({user}) {
+  const [usuarios, setUsuarios] = useState([]);
+  const [loading, setLoading]   = useState(true);
+  const [erro, setErro]         = useState('');
+  const [busca, setBusca]       = useState('');
+  const [confirmDel, setConfirmDel] = useState(null); // id do usuário a deletar
+  const [toast, setToast]       = useState('');
+  const [stats, setStats]       = useState({total:0, confirmados:0, hoje:0});
+
+  useEffect(()=>{ carregar(); },[]);
+  useEffect(()=>{ if(toast){const t=setTimeout(()=>setToast(''),2500);return()=>clearTimeout(t);} },[toast]);
+
+  async function carregar() {
+    setLoading(true); setErro('');
+    try {
+      // Busca usuários via função admin do Supabase (requer service_role no server side)
+      // Como estamos no client com anon key, usamos a tabela financa_data + auth metadata
+      // A abordagem correta client-side: listar via financa_data joined com dados básicos
+      const {data, error} = await sb.from('financa_data')
+        .select('user_id, updated_at, payload')
+        .order('updated_at', {ascending: false});
+      if(error) throw error;
+
+      // Busca sessão atual para pegar e-mail do próprio admin
+      const {data:{user:me}} = await sb.auth.getUser();
+
+      // Monta lista de usuários com dados disponíveis
+      const lista = (data||[]).map(row => ({
+        id: row.user_id,
+        updated_at: row.updated_at,
+        lancamentos: row.payload?.lancamentos?.length || 0,
+        investimentos: row.payload?.investimentos?.length || 0,
+        metas: row.payload?.metas?.length || 0,
+        isMe: row.user_id === me?.id,
+      }));
+
+      // Tenta enriquecer com e-mails via tabela profiles (se existir)
+      // ou exibe UUID com indicação do próprio admin
+      setUsuarios(lista);
+      const hoje = new Date().toISOString().slice(0,10);
+      setStats({
+        total: lista.length,
+        hoje: lista.filter(u=>u.updated_at?.slice(0,10)===hoje).length,
+      });
+    } catch(e) {
+      setErro('Erro ao carregar usuários: '+e.message);
+    } finally { setLoading(false); }
+  }
+
+  async function deletarUsuario(userId) {
+    try {
+      // Deleta os dados do usuário (a conta em auth.users só pode ser deletada via service_role/server)
+      const {error} = await sb.from('financa_data').delete().eq('user_id', userId);
+      if(error) throw error;
+      setUsuarios(u=>u.filter(x=>x.id!==userId));
+      setConfirmDel(null);
+      setToast('Dados do usuário removidos com sucesso.');
+    } catch(e) {
+      setErro('Erro ao remover: '+e.message);
+      setConfirmDel(null);
+    }
+  }
+
+  const lista = usuarios.filter(u =>
+    !busca || u.id.toLowerCase().includes(busca.toLowerCase()) || (u.isMe && 'gabriel'.includes(busca.toLowerCase()))
+  );
+
+  return React.createElement(React.Fragment,null,
+    // Header
+    React.createElement("div",{className:"topbar"},
+      React.createElement("div",null,
+        React.createElement("div",{className:"eyebrow"},"Painel administrativo · acesso restrito"),
+        React.createElement("div",{className:"h-title"},"Administração")
+      ),
+      React.createElement("button",{className:"btn btn-ghost",onClick:carregar,style:{gap:6}},
+        React.createElement(Ic.cloud,{width:15,height:15}),"Atualizar"
+      )
+    ),
+
+    // KPIs
+    React.createElement("div",{className:"kpis",style:{gridTemplateColumns:'repeat(3,1fr)',marginBottom:18}},
+      React.createElement("div",{className:"card kpi"},
+        React.createElement("div",{className:"kpi-accent"}),
+        React.createElement("div",{className:"lab"},"Total de usuários"),
+        React.createElement("div",{className:"val",style:{color:'var(--navy)'}},stats.total),
+        React.createElement("div",{className:"cap"},"com dados salvos")
+      ),
+      React.createElement("div",{className:"card kpi"},
+        React.createElement("div",{className:"lab"},"Ativos hoje"),
+        React.createElement("div",{className:"val",style:{color:'var(--pos)'}},stats.hoje),
+        React.createElement("div",{className:"cap"},"atualizaram dados hoje")
+      ),
+      React.createElement("div",{className:"card kpi"},
+        React.createElement("div",{className:"lab"},"Sua conta"),
+        React.createElement("div",{className:"val",style:{fontSize:14,marginTop:10,color:'var(--teal)'}},user.email),
+        React.createElement("div",{className:"cap"},"administrador")
+      )
+    ),
+
+    // Aviso sobre e-mails
+    React.createElement("div",{style:{background:'#fffbe6',border:'1px solid #ffe58f',borderRadius:10,padding:'10px 16px',fontSize:13,color:'#7c6400',marginBottom:16,lineHeight:1.6}},
+      React.createElement("b",null,"ℹ️ Sobre os e-mails: "),
+      "Para ver os e-mails dos usuários, acesse ",
+      React.createElement("b",null,"Authentication → Users"),
+      " no painel do Supabase. A chave anon não permite listar e-mails por segurança — os IDs abaixo correspondem aos usuários listados lá."
+    ),
+
+    // Tabela de usuários
+    React.createElement("div",{className:"card panel"},
+      React.createElement("div",{className:"sec-h"},
+        React.createElement(Ic.users,{width:15,height:15,style:{marginRight:6}}),"Usuários cadastrados (",lista.length,")",
+        React.createElement("input",{
+          placeholder:"Buscar por ID...",
+          value:busca,
+          onChange:e=>setBusca(e.target.value),
+          style:{padding:'4px 10px',border:'1px solid rgba(255,255,255,.2)',borderRadius:7,fontSize:12,background:'rgba(255,255,255,.1)',color:'#fff',outline:'none',width:200}
+        })
+      ),
+      loading
+        ? React.createElement("div",{className:"empty"},"Carregando...")
+        : erro
+          ? React.createElement("div",{style:{padding:16,color:'var(--neg)',fontSize:13}},erro)
+          : React.createElement("table",null,
+              React.createElement("thead",null,
+                React.createElement("tr",null,
+                  React.createElement("th",null,"ID do usuário"),
+                  React.createElement("th",null,"Perfil"),
+                  React.createElement("th",{className:"r"},"Lançamentos"),
+                  React.createElement("th",{className:"r"},"Investimentos"),
+                  React.createElement("th",{className:"r"},"Metas"),
+                  React.createElement("th",null,"Último acesso"),
+                  React.createElement("th",null,"Ação")
+                )
+              ),
+              React.createElement("tbody",null,
+                lista.length
+                  ? lista.map(u=>React.createElement("tr",{key:u.id,style:{background:u.isMe?'#f0f7ff':''}},
+                      React.createElement("td",{style:{fontFamily:'monospace',fontSize:11,color:'var(--muted)'}},u.id.slice(0,18)+'…'),
+                      React.createElement("td",null,
+                        u.isMe
+                          ? React.createElement("span",{className:"pill",style:{background:'rgba(181,138,44,.15)',color:'var(--gold)'}},"Admin (você)")
+                          : React.createElement("span",{className:"pill",style:{background:'var(--tint)',color:'var(--teal)'}},"Usuário")
+                      ),
+                      React.createElement("td",{className:"r num"},u.lancamentos),
+                      React.createElement("td",{className:"r num"},u.investimentos),
+                      React.createElement("td",{className:"r num"},u.metas),
+                      React.createElement("td",{style:{fontSize:12,color:'var(--muted)'}},
+                        u.updated_at ? new Date(u.updated_at).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}) : '—'
+                      ),
+                      React.createElement("td",null,
+                        !u.isMe && React.createElement("button",{
+                          onClick:()=>setConfirmDel(u.id),
+                          style:{fontSize:11,color:'var(--neg)',fontWeight:600,padding:'3px 8px',border:'1px solid var(--neg)',borderRadius:6,background:'none',cursor:'pointer'}
+                        },"Remover dados")
+                      )
+                    ))
+                  : React.createElement("tr",null,React.createElement("td",{className:"empty",colSpan:7},"Nenhum usuário encontrado."))
+              )
+            )
+    ),
+
+    // Modal de confirmação de remoção
+    confirmDel && React.createElement("div",{className:"modal-bg",onClick:()=>setConfirmDel(null)},
+      React.createElement("div",{className:"modal",onClick:e=>e.stopPropagation(),style:{maxWidth:400}},
+        React.createElement("div",{className:"modal-h"},
+          React.createElement("h3",{style:{color:'var(--neg)'}},"Confirmar remoção"),
+          React.createElement("button",{onClick:()=>setConfirmDel(null),style:{fontSize:22,color:'var(--muted)'}},"×")
+        ),
+        React.createElement("div",{className:"modal-b"},
+          React.createElement("p",{style:{fontSize:14,lineHeight:1.6,marginBottom:20,color:'var(--txt)'}},
+            "Isso irá remover todos os ",React.createElement("b",null,"dados financeiros"),
+            " deste usuário do banco de dados. A conta de login permanece ativa — para cancelar o acesso definitivamente, remova o usuário também em ",
+            React.createElement("b",null,"Authentication → Users")," no Supabase."
+          ),
+          React.createElement("div",{style:{display:'flex',gap:10}},
+            React.createElement("button",{className:"btn btn-ghost",style:{flex:1},onClick:()=>setConfirmDel(null)},"Cancelar"),
+            React.createElement("button",{className:"btn",style:{flex:1,background:'var(--neg)',color:'#fff'},onClick:()=>deletarUsuario(confirmDel)},"Confirmar remoção")
+          )
+        )
+      )
+    ),
+
+    toast && React.createElement("div",{className:"toast"},toast)
+  );
+}
+
+/* ============================================================
+   INICIALIZAÇÃO
+   ============================================================ */
+class ErroApp extends React.Component {
+  constructor(props){ super(props); this.state={erro:null}; }
+  static getDerivedStateFromError(e){ return {erro:e}; }
+  componentDidCatch(e,info){ console.error('Erro na aplicação:',e,info); }
+  render(){
+    if(this.state.erro){
+      return React.createElement("div",{style:{maxWidth:560,margin:'60px auto',padding:'32px',fontFamily:'var(--font-sans)',color:'var(--txt)'}},
+        React.createElement("div",{style:{fontFamily:'var(--font-display)',fontSize:24,color:'var(--navy)',marginBottom:12}},"Algo não carregou corretamente"),
+        React.createElement("p",{style:{fontSize:14,lineHeight:1.6,color:'var(--muted)',marginBottom:18}},
+          "Tente recarregar a página. Se o problema continuar, pode ser um dado inconsistente — você pode recarregar a última versão salva ou, em último caso, recomeçar os dados deste navegador (suas informações na nuvem não são apagadas por aqui)."),
+        React.createElement("div",{style:{display:'flex',gap:10,flexWrap:'wrap'}},
+          React.createElement("button",{className:"btn btn-primary",onClick:()=>location.reload()},"Recarregar página"),
+          React.createElement("button",{className:"btn btn-ghost",onClick:()=>{try{localStorage.clear();}catch(e){} location.reload();}},"Recomeçar dados locais")
+        ),
+        React.createElement("pre",{style:{marginTop:20,fontSize:11,color:'#b08d57',whiteSpace:'pre-wrap',background:'var(--tint)',padding:12,borderRadius:8}}, String(this.state.erro&&this.state.erro.message||this.state.erro))
+      );
+    }
+    return this.props.children;
+  }
+}
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(ErroApp,null,React.createElement(App)));
+</script>
+
+<!-- Setup Supabase — ver arquivo supabase_setup.sql -->
+<!--
+  Execute o arquivo supabase_setup.sql no SQL Editor do Supabase.
+  Ele cria a tabela financa_data com RLS para múltiplos usuários.
+
+  CREATE TABLE IF NOT EXISTS financa_data (
+    id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id    uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+    payload    jsonb NOT NULL,
+    updated_at timestamptz DEFAULT now()
+  );
+  CREATE UNIQUE INDEX IF NOT EXISTS financa_data_user_id_idx ON financa_data(user_id);
+  ALTER TABLE financa_data ENABLE ROW LEVEL SECURITY;
+  CREATE POLICY "sel" ON financa_data FOR SELECT USING (auth.uid() = user_id);
+  CREATE POLICY "ins" ON financa_data FOR INSERT WITH CHECK (auth.uid() = user_id);
+  CREATE POLICY "upd" ON financa_data FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+  CREATE POLICY "del" ON financa_data FOR DELETE USING (auth.uid() = user_id);
+-->
+
+
+</body></html>
